@@ -1,0 +1,12 @@
+{% autoescape off %}
+<!-- give protection against cross site scripting -->
+
+Hello{{users.first_name}},
+
+plese verifiy your account by clicking the below link
+
+http://{{domain}}{% url 'activate' uidb64-uid token=token %}
+
+if this is not done by you pls ignore it!
+
+{% endautoescape %}
