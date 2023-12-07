@@ -5,13 +5,10 @@ from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
 # Create your models here.
 
 
-
-
-
 class MyAccountManager(BaseUserManager):
     
     def create_user(self,first_name ,last_name ,username, email ,password=None):#Information about the user|| The user's password, which defaults to None to allow for users without a password (e.g., social media logins).
-        print("dskfksjdklfjsldkfj")
+
         if not email :
             raise ValueError('User must have an email address')
         #The method checks if email and username are provided. If not, it raises ValueError with a message indicating that an email address and username are required.
@@ -26,14 +23,8 @@ class MyAccountManager(BaseUserManager):
         )
         user.set_password(password)#making hashed password
         user.save(using = self._db)
-        print(user.password)
-
+        # print(user.password)
         return user
-
-        
-        # user.set_password(password) #  set_password setting the password inbuild function
-        # user.save(using=self._db) #SAVING THE USER TO THE DB,, The using=self._db argument allows specifying the database to use, which can be useful in multi-database setups.
-        # return user
     
         
     
@@ -49,7 +40,7 @@ class MyAccountManager(BaseUserManager):
           user.is_staff = True
           user.is_active =True
           user.is_superuser = True
-          user.is_superadmin = True
+          # user.is_superadmin = True
           user.save(using=self._db ) # _db save the database or db connection
           return user
 
@@ -76,19 +67,19 @@ class Registerinfo(AbstractBaseUser):
     objects = MyAccountManager()
     
     
+    class Meta:
+        verbose_name = 'registerinfo'
+        verbose_name_plural = 'users'
     
     
-    
-    def __str__(self):
-        return self.first_name
  
     def __str__(self):
         return self.email
     
-    def has_perm(self,perm,obj=None):  # a person is_admin he can all permitons to change everything 
+    def has_perm(self,perm,obj=None):# a person is_admin he can all permitons to change everything 
         return self.is_admin
     
-    def has_module_perms(self,add_label):     # Check if the user has the appropriate permissions for the module
+    def has_module_perms(self,add_label):# Check if the user has the appropriate permissions for the module
         return True
 
 

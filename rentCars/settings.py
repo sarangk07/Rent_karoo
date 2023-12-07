@@ -13,15 +13,23 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+from dotenv import load_dotenv
+import os
+
+
+load_dotenv()
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ur62pn1y(ssku1d1@4nn6#xvnj(*0*dy*_q1vo7pa-3mkq24j_'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -41,6 +49,7 @@ INSTALLED_APPS = [
     
     #local apps
     'users',
+    'home',
 ]
 
 MIDDLEWARE = [
@@ -72,17 +81,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'rentCars.wsgi.application'
-
 #tell to settings, that we are using custom user model
 AUTH_USER_MODEL = 'users.Registerinfo'
-#users is app name & Registerinfo is class[model] name
-AUTHENTICATION_BACKENDS = [
-    # 'users.Registerinfo',
-    'users.backends.EmailBackend',
-    'django.contrib.auth.backends.ModelBackend',  # Keep the ModelBackend as a fallback
-]
 
-# settings.py
+
+
 
 
 # Database
@@ -135,7 +138,23 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'templates\static'),
+# ]
+STACTIC_ROOT = 'static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'templates/static')
+] 
+MEDIA_URL ='media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+#to get images in templates
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = BASE_DIR /'media'
+
 
 
 # Default primary key field type
@@ -157,6 +176,6 @@ LOGIN_URL = 'login'  # Update with your actual login URL
 #SMTP config
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'prameshpk@gmail.com'
-EMAIL_HOST_PASSWORD = 'evysruthteqqlocf'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True

@@ -15,8 +15,17 @@ class RegisterForm(forms.ModelForm):
         # fields =['first_name','last_name','email','mobile']
       
       
+      
+    #for styling input fields
+    def __init__(self,*args,**kwargs):
+        super(RegisterForm,self).__init__(*args,**kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] = 'form-control'
+
+     
+    #password and conf_password validation 
     def clean(self):
-        cleaned_data = super(RegisterForm, self).clean()
+        cleaned_data = super(RegisterForm, self).clean() #super means it accessing the password and conf_password from the RegisterForm.
         password = cleaned_data.get('password')
         conf_password = cleaned_data.get('conf_password')
         print(password, conf_password)
@@ -27,12 +36,7 @@ class RegisterForm(forms.ModelForm):
 
           
         
-        
-    def __init__(self,*args,**kwargs):
-        super(RegisterForm,self).__init__(*args,**kwargs)
-        for field in self.fields:
-            self.fields[field].widget.attrs['class'] = 'form-control'
-        
+            
         
     
     

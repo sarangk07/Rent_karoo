@@ -4,43 +4,117 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
+    
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'website/css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/jquery.timepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/style.css' %}">
+
+    
+
+    <style>
+        .backgroundcar{
+            background-image: url('{% static "website/images/bg_1.jpg" %}')
+        }
+        .car1{
+            background-image: url('{% static "website/images/car-1.jpg" %}')
+        }
+        .car2{
+            background-image: url('{% static "website/images/car-2.jpg" %}')
+        }
+        .car3{
+            background-image: url('{% static "website/images/car-3.jpg" %}')
+        }
+        .car4{
+            background-image: url('{% static "website/images/car-4.jpg" %}')
+        }
+        .about{
+            background-image: url('{% static "website/images/about.jpg" %}' )
+        }
+        .background3{
+            background-image: url('{% static "website/images/bg_3.jpg" %}')
+        }
+        .person1{
+            background-image: url('{% static "website/images/person_1.jpg" %}')
+        }
+        .person2{
+            background-image: url('{% static "website/images/person_2.jpg" %}')
+        }
+        .person3{
+            background-image: url('{% static "website/images/person_3.jpg" %}')
+        }
+        .img1{
+            background-image: url('{% static "website/images/image_1.jpg" %}')
+        }
+        .img2{
+            background-image: url('{% static "website/images/image_2.jpg" %}')
+        }
+        .img3{
+            background-image: url('{% static "website/images/image_3.jpg" %}')
+        }
+      </style>
+
+
     <title>{% block title %}Default Title{% endblock %}</title>
+
+
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Rent_Karoo!</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
+  <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Rent_Kar o!</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+        <ul class="navbar-nav">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
+                <a class="nav-link" href="#">Features</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Pricing</a>
+                <a class="nav-link" href="#">Pricing</a>
             </li>
+        </ul>
+        <ul class="navbar-nav">
             {% if user.id is none %}
-            <li class="nav-item">
-            <a class="nav-link" href="{% url 'login' %}" type="button">Login</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}" type="button">Login</a>
+                </li>
             {% else %}
-            
-            <li class="nav-item">
-            <a class="nav-link" href="{% url 'logout' %}" type="button">Logout</a>
-            </li>
-            <li><a class="nav-link">{{user.username}}</a></li>
-            <!-- <a href="{% url 'register' %}" type="button">Register</a> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}" type="button">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">{{ user.username }}</a>
+                </li>
             {% endif %}
-          </ul>
-        </div>
-    </nav>
+        </ul>
+    </div>
+</nav> -->
+
+
+
+
+
     {% block content %}
 
 
@@ -51,7 +125,29 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     
-    
+
+    <!-- index.html import -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <script src="{% static 'website/js/jquery.min.js' %}"></script>
+    <script src="{% static 'website/js/jquery-migrate-3.0.1.min.js' %}"></script>
+    <script src="{% static 'website/js/popper.min.js' %}"></script>
+    <script src="{% static 'website/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'website/js/jquery.easing.1.3.js' %}"></script>
+    <script src="{% static 'website/js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'website/js/jquery.stellar.min.js' %}"></script>
+    <script src="{% static 'website/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'website/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'website/js/aos.js' %}"></script>
+    <script src="{% static 'website/js/jquery.animateNumber.min.js' %}"></script>
+    <script src="{% static 'website/js/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'website/js/jquery.timepicker.min.js' %}"></script>
+    <script src="{% static 'website/js/scrollax.min.js' %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="{% static 'website/js/google-map.js' %}"></script>
+    <script src="{% static 'website/js/main.j' %}s"></script>
+
+
+
 </body>
 </html>
