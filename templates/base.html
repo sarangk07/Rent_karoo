@@ -148,6 +148,16 @@
     <script src="{% static 'website/js/main.j' %}s"></script>
 
 
-
+    <script>
+        document.getElementById('paymentForm').addEventListener('submit', function (event) {
+            var checkbox = document.getElementById('form2Example3c');
+    
+            // Check if the checkbox is selected
+            if (!checkbox.checked) {
+                alert('Please agree to the Terms and Conditions before submitting.');
+                event.preventDefault();  // Prevent form submission
+            }
+        });
+    </script>
 </body>
 </html>

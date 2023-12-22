@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+CarsViews
+{% endblock %}
+    
+
+
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark " id="ftco-navbar">
+	<div class="container">
+	  <a class="navbar-brand" href="{% url 'home' %}">Rent <span>Kar o</span></a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="oi oi-menu"></span> Menu
+	  </button>
+  
+	  <div class="collapse navbar-collapse" id="ftco-nav">
+		<ul class="navbar-nav ml-auto">
+		  <li class="nav-item active"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+		  <li class="nav-item"><a href="{% url 'cars' %}" class="nav-link">Cars</a></li>
+		  
+		  <li class="nav-item"><a href="{% url 'dashbord' %}" class="nav-link"><img src="https://www.freeiconspng.com/uploads/profile-icon-1.png" width="35" height="35" alt="Free High quality Profile Icon" /></a></li>
+
+
+		</ul>
+	  </div>
+	</div>
+  </nav>
+
+
+
+	<section class="ftco-section ftco-car-details">
+      <div class="container">
+      	<div class="row justify-content-center">
+      		<div class="col-md-12">
+      			<div class="car-details">
+      				<div class="img rounded" style="background-image: url({{cars.carImg.url}});"></div>
+      				<div class="text text-center">
+      					<span class="subheading">{{cars.make}}</span>
+      					<h2>{{cars.model}}</h2>
+						{% if cars.fuel == 'Electric' and cars.rentAmount < 5000 %}
+						  <h1 class="nav-item nav-link active">Exclusive</h1>
+						{% elif cars.rentAmount >= 5000 %}
+						  <h1 class="nav-item nav-link active">Premium</h1>
+						{% else %}
+						  
+						{% endif %}
+					  
+      				</div>
+      			</div>
+      		</div>
+      	</div>
+      	<div class="row">
+      		<div class="col-md d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services">
+              <div class="media-body py-md-4">
+              	<div class="d-flex mb-3 align-items-center">
+	              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-dashboard"></span></div>
+	              	<div class="text">
+		                <h3 class="heading mb-0 pl-3">
+		                	Mileage
+		                	<span>{{cars.milage}}</span>
+		                </h3>
+	                </div>
+                </div>
+              </div>
+            </div>      
+          </div>
+          <div class="col-md d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services">
+              <div class="media-body py-md-4">
+              	<div class="d-flex mb-3 align-items-center">
+	              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-pistons"></span></div>
+	              	<div class="text">
+		                <h3 class="heading mb-0 pl-3">
+		                	Transmission
+		                	<span>{{cars.transmission}}</span>
+		                </h3>
+	                </div>
+                </div>
+              </div>
+            </div>      
+          </div>
+          <div class="col-md d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services">
+              <div class="media-body py-md-4">
+              	<div class="d-flex mb-3 align-items-center">
+	              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-car-seat"></span></div>
+	              	<div class="text">
+		                <h3 class="heading mb-0 pl-3">
+		                	Seats
+		                	<span>{{cars.seatingCapacity}}</span>
+		                </h3>
+	                </div>
+                </div>
+              </div>
+            </div>      
+          </div>
+          <div class="col-md d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services">
+              <div class="media-body py-md-4">
+              	<div class="d-flex mb-3 align-items-center">
+	              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-backpack"></span></div>
+	              	<div class="text">
+		                <h3 class="heading mb-0 pl-3">
+		                	Luggage
+		                	<span>4 Bags</span>
+		                </h3>
+	                </div>
+                </div>
+              </div>
+            </div>      
+          </div>
+          <div class="col-md d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services">
+              <div class="media-body py-md-4">
+              	<div class="d-flex mb-3 align-items-center">
+	              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-diesel"></span></div>
+	              	<div class="text">
+		                <h3 class="heading mb-0 pl-3">
+		                	Fuel
+		                	<span>{{cars.fuel}}</span>
+		                </h3>
+	                </div>
+                </div>
+              </div>
+            </div>      
+          </div>
+      	</div>
+      	<div class="row">
+      		<div class="col-md-12 pills">
+						<div class="bd-example bd-example-tabs">
+							<div class="d-flex justify-content-center">
+							  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+
+							    <li class="nav-item">
+							      <a class="nav-link active" id="pills-description-tab" data-toggle="pill" href="#pills-description" role="tab" aria-controls="pills-description" aria-expanded="true">Features</a>
+							    </li>
+							    <li class="nav-item">
+							      <a class="nav-link" id="pills-manufacturer-tab" data-toggle="pill" href="#pills-manufacturer" role="tab" aria-controls="pills-manufacturer" aria-expanded="true">Description</a>
+							    </li>
+							    <li class="nav-item">
+							      <a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab" aria-controls="pills-review" aria-expanded="true">Review</a>
+							    </li>
+							  </ul>
+							</div>
+
+						  <div class="tab-content" id="pills-tabContent">
+						    <div class="tab-pane fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
+						    	<div class="row">
+						    		<div class="col-md-4">
+						    			<ul class="features">
+						    				<li class="check"><span class="ion-ios-checkmark"></span>Airconditions</li>
+						    				<li class="check"><span class="ion-ios-checkmark"></span>Child Seat</li>
+						    				<li class="check"><span class="ion-ios-checkmark"></span>GPS</li>
+											{% if cars.seatingCapacity == '4' or cars.carType == 'Hatchback' %}
+						    				<li class="check"><span class="ion-ios-close"></span>Large Luggage</li>
+											{% else %}
+											<li class="check"><span class="ion-ios-checkmark"></span>Large Luggage</li>
+											{% endif %}
+						    				<li class="check"><span class="ion-ios-checkmark"></span>Music</li>
+						    			</ul>
+						    		</div>
+						    		<div class="col-md-4">
+						    			<ul class="features">
+						    				<li class="check"><span class=""></span>Engine: {{cars.engine}}</li>
+						    				<li class="check"><span class=""></span>Type: {{cars.carType}}</li>
+						    				<li class="check"><span class=""></span>Number: {{cars.carNumber}}</li>
+						    				<li class="check"><span class=""></span>Color: {{cars.color}}</li>
+						    				<li class="check"><span class=""></span>Year: {{cars.year}}</li>
+						    			</ul>
+						    		</div>
+						    		<div class="col-md-4">
+						    			<ul class="features">
+						    				<li class="check"><span class=""></span>RC_Expired: {{cars.rc_expired_date}}</li>
+											{% if cars.carType == 'SUV' %}
+						    					<li class="check"><span class="ion-ios-checkmark"></span>OffRoader</li>
+											{% else %}
+												<li class="check"><span class="ion-ios-close"></span>OffRoader</li>
+											{% endif %}
+						    				<li class="check"><span class="ion-ios-checkmark"></span>Car Kit</li>
+											{% if cars.seatingCapacity == '7' or cars.carType == 'Sedan' %}
+						    				<li class="check"><span class="ion-ios-checkmark"></span>FamilyTrip</li>
+											{% else %}
+											<li class="check"><span class="ion-ios-close"></span>FamilyTrip</li>
+											{% endif %}
+						    				<li class="check"><span class="ion-ios-checkmark"></span>Climate control</li>
+						    			</ul>
+						    		</div>
+						    	</div>
+						    </div>
+
+						    <div class="tab-pane fade" id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
+						      <p>{{cars.description}}</p>
+						    </div>
+
+						  </div>
+						</div>
+		      </div>
+				</div>
+				<div class="footer d-flex flex-column mt-5">
+					<div class="row r4">
+						<!-- <div class="col-md-2 myt des"><a href="#">Description</a></div>
+						<div class="col-md-2 myt "><a href="#">Review</a></div> -->
+						<div class="col-md-2 mio offset-md-4"><a href="{% url 'cars' %}">Cars</a></div>
+						<!-- Add this block inside your HTML where you want to display the "Book Now" button -->
+						{% if cars.in_garage %}
+						<div class="col-md-2 myt ">
+							<small>{{ cars.rentAmount }}/Day</small>
+							<button type="button" class="btn btn-outline-warning"><a href="{% url 'pickupDetails' id=cars.id %}">Book Now</a></button>
+						</div>
+						{% else %}
+						<div class="col-md-2 myt "><h3>NOT AVAILABLE!</h3></div>
+						{% endif %}
+					</div>
+				</div>
+      </div>
+    </section>
+
+        <div class="row">
+          <div class="col-md-12 text-center"> 
+
+            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+  
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+  {% endblock %}

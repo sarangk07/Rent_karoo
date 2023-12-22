@@ -63,42 +63,62 @@ small.justify-content-center{
 </style>
 
 {% block content %}
-<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	<div class="container">
 	  <a class="navbar-brand" href="{% url 'home' %}">Rent <span>Kar o</span></a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="oi oi-menu"></span> Menu
+		<span class="navbar-toggler-icon"></span>
 	  </button>
   
 	  <div class="collapse navbar-collapse" id="ftco-nav">
 		<ul class="navbar-nav ml-auto">
-		  <li class="nav-item active"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
-		  <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-		  <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-		  <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
-		  <li class="nav-item"><a href="{% url 'cars' %}" class="nav-link">Cars</a></li>
-		  <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-		  <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+		  <li class="nav-item active">
+			<a href="{% url 'home' %}" class="nav-link">Home</a>
+		  </li>
+		  <li class="nav-item">
+			<a href="{% url 'cars' %}" class="nav-link">Cars</a>
+		  </li>
+  
+		  <form class="form-inline my-2 my-lg-0 ml-3" action="{% url 'search' %}">
+			<input class="form-control mr-sm-2 searchBar" type="search" placeholder="Search Model" aria-label="Search" name="keyword">
+			<button class="btn btn-outline-success my-2 my-sm-0 searchBar" type="submit">Search</button>
+		  </form>
+  
+		  <li class="nav-item dropdown ml-3">
+			<a class="btn btn-primary dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Types
+			</a>
+			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			  <a class="dropdown-item" href="{% url 'sorting' car_type='SUV' %}">SUV</a>
+			  <a class="dropdown-item" href="{% url 'sorting' car_type='Hatchback' %}">Hatchback</a>
+			  <a class="dropdown-item" href="{% url 'sorting' car_type='Sedan' %}">Sedan</a>
+			  
+			</div>
+		  </li>
+  
 		  {% if user.id is none %}
-			  <li class="nav-item">
-				  <a class="nav-link" href="{% url 'login' %}" type="button">Login</a>
-			  </li>
+			<li class="nav-item">
+			  <a class="nav-link" href="{% url 'login' %}" type="button">Login</a>
+			</li>
 		  {% else %}
-			  <li class="nav-item">
-				  <a class="nav-link" href="{% url 'logout' %}" type="button">Logout</a>
-			  </li>
-			  <li class="nav-item">
-				  <a class="nav-link" href="{% url 'dashbord' %}">{{ user.username }}</a>
-			  </li>
+			<li class="nav-item">
+			  <a class="nav-link" href="{% url 'dashbord' %}">{{ user.username }}</a>
+			</li>
 		  {% endif %}
 		</ul>
 	  </div>
 	</div>
   </nav>
+  
+  
+
+
+
   <br>
 <div class="container-fluid d-flex justify-content-center bg-dark">
 	
 	<div class="row mt-5">
+	{% if cars %}
 	{% for car in cars %}
 	  <div class="col-sm-4">
 		<div class="card">
@@ -109,9 +129,42 @@ small.justify-content-center{
 		  <h6>{{car.rentAmount}} /Day</h6>
 		</div>
 		<hr class="mt-2 mx-3">
+
+		
+		
+		
+
 		<div class="d-flex flex-row justify-content-between px-3 pb-4">
 		  <div class="d-flex flex-column"><span class="text-muted">Fuel Efficiency</span><small class="text-muted">{{car.milage}}&ast;</small></div>
-		  <!-- <div class="d-flex flex-column"><h5 class="mb-0">8.5/7.1</h5><small class="text-muted text-right">(city/Hwy)</small></div> -->
+
+
+<!-- wishlist--------image -->
+	{% if request.user.is_anonymous %}
+		
+	{% else %}
+		{% if car in wishlist %}
+		<form method="post" action="{% url 'remove_from_wishlist' car.id %}">
+			{% csrf_token %}
+
+			<button type="submit" class="btn btn-link p-0">
+				<img src="/media/wishlist2.png" alt="Add to Wishlist" style="height: 20px; width: 20px;">
+			</button>
+		</form>
+		{% else %}
+		<form method="post" action="{% url 'add_to_wishlist' car.id %}">
+			{% csrf_token %}
+
+			<button type="submit" class="btn btn-link p-0">
+				<img src="/media/wishlist1.png" alt="Add to Wishlist" style="height: 20px; width: 20px;">
+			</button>
+		</form>
+		{% endif %}
+	{% endif %}
+
+		
+
+		
+		
 		</div>
 		<div class="d-flex flex-row justify-content-between p-3 mid">
 		  <!-- <div class="d-flex flex-column"><small class="text-muted mb-1">ENGINE</small><div class="d-flex flex-row"><img src="https://imgur.com/iPtsG7I.png" width="35px" height="25px"><div class="d-flex flex-column ml-1"><small class="ghj">1.4L MultiAir</small><small class="ghj">16V I-4 Turbo</small></div></div></div> -->
@@ -129,9 +182,64 @@ small.justify-content-center{
 		</div>
 	  </div>
 	  {% endfor %}
+	  
+	  {% else %}
+	  <div>
+		not found
+	  </div>
+	  {% endif %}
 	</div>
-	
   </div>
+
+
+
+<!-- pagination -->
+
+  <div class="d-flex justify-content-center">
+    <nav aria-label="Page navigation example">
+        {% if cars.has_other_pages %}
+        <ul class="pagination" style="align-items: center; text-align: center;">
+            {% if cars.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{cars.previous_page_number}}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            {% endif %}
+            {% for i in cars.paginator.page_range %}
+                {% if cars.number == i %}
+                <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+                {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if cars.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{cars.next_page_number}}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link " href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+        {% endif %}
+    </nav>
+</div>
 
 {% endblock %}
 

@@ -1,8 +1,11 @@
+from typing import Any
 from django import forms
-from .models import Registerinfo
+import re
+
+from .models import Registerinfo,Profile
 
 class RegisterForm(forms.ModelForm):
-    #password um conform password um create akkunnu . for checking, it don't need to add in the database 
+    #password & conform password field ,it don't need to add in the database 
     password = forms.CharField(widget=(forms.PasswordInput(attrs={'placeholder':'password','class':'form-control'})))
     conf_password = forms.CharField(widget=(forms.PasswordInput(attrs={'placeholder':'re-type','class':'form-control'})))
     
@@ -28,13 +31,47 @@ class RegisterForm(forms.ModelForm):
         cleaned_data = super(RegisterForm, self).clean() #super means it accessing the password and conf_password from the RegisterForm.
         password = cleaned_data.get('password')
         conf_password = cleaned_data.get('conf_password')
+        first_name = cleaned_data.get('first_name')
+        last_name = cleaned_data.get('last_name')
+        
+        
+        if not re.match(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$', password):
+            print(password,conf_password)
+            raise forms.ValidationError(
+                "Password must contain at least one letter, one digit, and be at least 8 characters long."
+                )       
+        if not re.match(r'^[A-Za-z][A-Za-z\s]*$', first_name):
+            raise forms.ValidationError("First name must only contain characters and no spaces.")
+
+        if not re.match(r'^[A-Za-z][A-Za-z\s]*$', last_name):
+            raise forms.ValidationError("Last name must only contain characters and no spaces.")
+        
         print(password, conf_password)
         if password != conf_password:
             raise forms.ValidationError(
                 "Password does not match"
             )
+            
+        return cleaned_data
 
-          
+
+
+class ProfileUpdate(forms.ModelForm):
+
+    class Meta:
+        model = Profile  
+        fields = "__all__" 
+        
+        
+    def __init__(self,*args,**kwargs):
+        super(ProfileUpdate,self).__init__(*args,**kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] = 'form-control'
+
+        
+    def save(self, commit: bool = ...) -> Any:
+        return super().save(commit)
+        
         
             
         

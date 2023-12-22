@@ -23,17 +23,19 @@ home
     <div class="collapse navbar-collapse" id="ftco-nav">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
-        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+        <!-- <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
         <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-        <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
-        <li class="nav-item"><a href="{% url 'cars' %}" class="nav-link">Cars</a></li>
-        <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+        <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li> -->
+        
+        <!-- <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li> -->
         {% if user.id is none %}
+            <li class="nav-item"><a href="{% url 'cars' %}" class="nav-link">Cars</a></li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'login' %}" type="button">Login</a>
             </li>
         {% else %}
+            <li class="nav-item"><a href="{% url 'cars' %}" class="nav-link">Cars</a></li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout' %}" type="button">Logout</a>
             </li>
@@ -69,37 +71,8 @@ home
     <div class="row no-gutters">
       <div class="col-md-12	featured-top">
         <div class="row no-gutters">
-          <div class="col-md-4 d-flex align-items-center">
-            <form action="#" class="request-form ftco-animate bg-primary">
-              <h2>Make your trip</h2>
-              <div class="form-group">
-                <label for="" class="label">Pick-up location</label>
-                <input type="text" class="form-control" placeholder="City, Airport, Station, etc">
-              </div>
-              <div class="form-group">
-                <label for="" class="label">Drop-off location</label>
-                <input type="text" class="form-control" placeholder="City, Airport, Station, etc">
-              </div>
-              <div class="d-flex">
-                <div class="form-group mr-2">
-                  <label for="" class="label">Pick-up date</label>
-                  <input type="text" class="form-control" id="book_pick_date" placeholder="Date">
-                </div>
-                <div class="form-group ml-2">
-                  <label for="" class="label">Drop-off date</label>
-                  <input type="text" class="form-control" id="book_off_date" placeholder="Date">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="" class="label">Pick-up time</label>
-                <input type="text" class="form-control" id="time_pick" placeholder="Time">
-              </div>
-              <div class="form-group">
-                <input type="submit" value="Rent A Car Now" class="btn btn-secondary py-3 px-4">
-              </div>
-            </form>
-          </div>
-          <div class="col-md-8 d-flex align-items-center">
+          
+          <div class="col-md-12 d-flex align-items-center">
             <div class="services-wrap rounded-right w-100">
               <h3 class="heading-section mb-4">Better Way to Rent Your Perfect Cars</h3>
               <div class="row d-flex mb-4">
@@ -128,7 +101,7 @@ home
                   </div>      
                 </div>
               </div>
-              <p><a href="#" class="btn btn-primary py-3 px-4">Reserve Your Perfect Car</a></p>
+              <p><a href="{% url 'cars' %}" class="btn btn-primary py-3 px-4">Reserve Your Perfect Car</a></p>
             </div>
           </div>
         </div>
@@ -158,12 +131,27 @@ home
                
               </div>
               <div class="text">
+                {% if car.fuel == 'Electric' and car.rentAmount < 5000 %}
+                  <span>Exclusive</span>
+                {% elif car.rentAmount >= 5000 %}
+						      <span>Premium</span>
+						    {% else %}
+
+                {% endif %}
                 <h2 class="mb-0"><a href="#"> {{ car.model }} </a></h2>
+                
                 <div class="d-flex mb-3">
-                  <span class="cat">{{ car.make }}</span>
+                  <span class="cat">{{ car.make }} </span>
                   <p class="price ml-auto">{{ car.rentAmount }}<span> /day</span></p>
                 </div>
-                <p class="d-flex mb-0 d-block"><a href="{% url 'pickupDetails' id=car.id %}" class="btn btn-primary py-2 mr-1"> Book now </a> <a href="{% url 'carDetails' id=car.id %}" class="btn btn-secondary py-2 ml-1">Details</a></p>
+                <p class="d-flex mb-0 d-block">
+                  {% if car.in_garage %}
+                  <a href="{% url 'pickupDetails' id=car.id %}" class="btn btn-primary py-2 mr-1"> Book now </a> 
+                  {% else %}
+
+                  {% endif %}
+                  <a href="{% url 'carDetails' id=car.id %}" class="btn btn-secondary py-2 ml-1">Details</a>
+                </p>
               </div>
             </div>
           </div>
@@ -185,8 +173,8 @@ home
           <span class="subheading">About us</span>
           <h2 class="mb-4">Welcome to Rent Karo</h2>
 
-          <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-          <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+          <p>"Rent Karo" is a premier car rental platform designed to provide a seamless and convenient vehicle rental experience. With an extensive fleet of well-maintained vehicles, ranging from compact cars to spacious SUVs, customers can easily find the perfect ride for any occasion. The user-friendly website offers a straightforward booking process, allowing users to specify rental dates, vehicle preferences, and additional services.</p>
+          <p>"Rent Karo" prioritizes customer satisfaction by ensuring transparent pricing, flexible rental durations, and efficient customer support. The platform incorporates advanced search and filtering options, making it effortless for users to locate the ideal vehicle that suits their needs and budget. Whether for a weekend getaway, business trip, or special event, "Rent Karo" aims to be the go-to choice for reliable and affordable car rentals.</p>
           <p><a href="#" class="btn btn-primary py-3 px-4">Search Vehicle</a></p>
         </div>
       </div>
@@ -393,7 +381,7 @@ home
       <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
         <div class="block-18">
           <div class="text text-border d-flex align-items-center">
-            <strong class="number" data-number="60">0</strong>
+            <strong class="number" data-number="10">0</strong>
             <span>Year <br>Experienced</span>
           </div>
         </div>
@@ -401,7 +389,7 @@ home
       <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
         <div class="block-18">
           <div class="text text-border d-flex align-items-center">
-            <strong class="number" data-number="1090">0</strong>
+            <strong class="number" data-number="100">0</strong>
             <span>Total <br>Cars</span>
           </div>
         </div>
@@ -414,14 +402,14 @@ home
           </div>
         </div>
       </div>
-      <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
+      <!-- <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
         <div class="block-18">
           <div class="text d-flex align-items-center">
             <strong class="number" data-number="67">0</strong>
             <span>Total <br>Branches</span>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </section>	
@@ -492,6 +480,9 @@ home
 
 <!-- loader -->
 <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+
 
 
 {% endblock %}

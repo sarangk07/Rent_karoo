@@ -12,57 +12,151 @@ Pickup Details
 {% block content %}
 
 <section class="ftco-section ftco-no-pt bg-light">
-    <div class="container">
+    <div class="container" style="margin-top: 280px;">
       <div class="row no-gutters">
         <div class="col-md-12	featured-top">
           <div class="row no-gutters">
             <div class="col-md-4 d-flex align-items-center">
-              <form action="#" class="request-form ftco-animate bg-primary">
+
+
+              <form action="{% url 'payment' id=cars.id %}" class="request-form ftco-animate bg-primary" method="post">
+                {% csrf_token %}
                 <h2>Make your trip</h2>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="" class="label">Pick-up location</label>
                   <input type="text" class="form-control" placeholder="City, Airport, Station, etc">
                 </div>
                 <div class="form-group">
                   <label for="" class="label">Drop-off location</label>
                   <input type="text" class="form-control" placeholder="City, Airport, Station, etc">
+                </div> -->
+                <div class="form-group">
+                  <label for="" class="label">Name</label>
+                  <p class="form-control">{{users.first_name}}</p>
                 </div>
+                
                 <div class="d-flex">
                   <div class="form-group mr-2">
                     <label for="" class="label">Pick-up date</label>
-                    <input type="text" class="form-control" id="book_pick_date" placeholder="Date">
+                    <input type="text" class="form-control" id="book_pick_date" placeholder="Date" name="pickup">
                   </div>
                   <div class="form-group ml-2">
                     <label for="" class="label">Drop-off date</label>
-                    <input type="text" class="form-control" id="book_off_date" placeholder="Date">
+                    <input type="text" class="form-control" id="book_off_date" placeholder="Date" name="dropoff">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="" class="label">Pick-up time</label>
-                  <input type="text" class="form-control" id="time_pick" placeholder="Time">
+                  <input type="text" class="form-control" id="time_pick" placeholder="Time" name="pickuptime">
                 </div>
                 <div class="form-group">
-                  <label for="" class="label">Selected car/ choose</label>
-                  <input type="text" class="form-control" id="time_pick" placeholder={{cars.make}}__{{cars.model}}>
+                  <label for="" class="label">Email</label>
+                  <input type="text" class="form-control" id="time_pick" placeholder="Email" name="email">
                 </div>
                 <div class="form-group">
-                  <label for="" class="label">Rent</label>
-                  <input type="text" class="form-control" id="time_pick" placeholder={{cars.rentAmount}}/day>
+                  <label for="" class="label">Mobile No</label>
+                  <input type="text" class="form-control" id="time_pick" placeholder="Mobile" name="mobile">
+                </div>
+                <div class="form-group">
+                  <label for="" class="label">Licence ID</label>
+                  <input type="text" class="form-control" id="time_pick" placeholder="Licence" name="licence">
+                </div>
+
+
+
+
+
+
+                <div class="form-group">
+                  <label for="" class="label">Select Insurance & Protection Plans</label>
+                  <select class="form-control" name="selected_plan">
+                      <option value="basic">Basic Plan</option>
+                      <option value="premium">Premium Plan</option>
+                      <option value="diamond">Diamond Plan</option>
+                  </select>
+                </div>
+
+
+                
+
+
+
+
+                <div class="form-group">
+                  <label for="" class="label">Selected car: <h4>{{cars.make}} {{cars.model}}</h4></label>
+                  <!-- <input type="text" class="form-control" id="time_pick" placeholder={{cars.make}}__{{cars.model}}> -->
+                </div>
+          
+                <div class="form-group">
+                  <label for="" class="label">Rent: <h4>{{cars.rentAmount}} /Day</h4></label>
+                  <!-- <input type="text" class="form-control" id="time_pick" placeholder={{cars.rentAmount}}/day> -->
+                </div>
+                <!-- TermsandConditions -->
+                
+
+
+
+                <div class="form-check">
+                  <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" name="tc"/>
+                    <label class="label" for="form2Example3">
+                      I agree all <a href="{% url 'termsandConditions' %}" class="text-white"> Terms and Conditions</a>
+                    </label>
                 </div>
                 <div class="form-group">
                   <input type="submit" value="Payment" class="btn btn-secondary py-3 px-4">
                 </div>
+
+
+
               </form>
+
+
+
+
+
             </div>
             <div class="col-md-8 d-flex align-items-center">
+               
               <div class="services-wrap rounded-right w-100">
-                <h3 class="heading-section mb-4">Better Way to Rent Your Perfect Cars</h3>
+                <p>{% include 'includes/alerts.html' %}</p>
+
+
+              {% if other_bookings %}
+              <div class="card mt-4">
+                <div class="card-header bg-danger text-white">
+                  <h5 class="mb-0 text-white">Car Availability !</h5>
+                </div>
+                <div class="card-body">
+                  <p class="card-text text-danger">
+                    The car is not available for the selected dates due to other bookings.
+                  </p>
+                  <ul class="list-group">
+                    {% for booking in other_bookings %}
+                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>{{ booking.pickup_date|date:"F d, Y" }}</span>
+                        <span class="font-italic">TO</span>
+                        <span>{{ booking.dropoff_date|date:"F d, Y" }}</span>
+                        <span class="badge badge-secondary">
+                          Extended: {{ booking.dropoff_date|date:"F d, Y"|date:"+" }}2 days
+                        </span>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            {% else %}
+              {# Add any additional content you want to show when there are no other bookings #}
+            {% endif %}
+
+
+
+                <h3 class="heading-section mb-4 ">Better Way to Rent Your Perfect Cars</h3>
                 <div class="row d-flex mb-4">
                   <div class="col-md-4 d-flex align-self-stretch ftco-animate">
                     <div class="services w-100 text-center">
-                      <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
+                      <a href=""><div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div></a>
                       <div class="text w-100">
-                        <h3 class="heading mb-2">Choose Your Pickup Location</h3>
+                        <h3 class="heading mb-2">Basic Plan</h3>
                       </div>
                     </div>      
                   </div>
@@ -70,7 +164,7 @@ Pickup Details
                     <div class="services w-100 text-center">
                       <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-handshake"></span></div>
                       <div class="text w-100">
-                        <h3 class="heading mb-2">Select the Best Deal</h3>
+                        <h3 class="heading mb-2">Premium Plan</h3>
                       </div>
                     </div>      
                   </div>
@@ -78,18 +172,71 @@ Pickup Details
                     <div class="services w-100 text-center">
                       <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-rent"></span></div>
                       <div class="text w-100">
-                        <h3 class="heading mb-2">Reserve Your Rental Car</h3>
+                        <h3 class="heading mb-2">Diamond Plan</h3>
                       </div>
                     </div>      
                   </div>
+                  <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+                    <!-- Move the "Home" button here -->
+                    <p><a href="{% url 'home' %}" class="btn btn-primary py-3 px-4">Home</a></p>
                 </div>
-                <p><a href="#" class="btn btn-primary py-3 px-4">Reserve Your Perfect Car</a></p>
+                <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+                    <!-- Keep the "Change Car" button here -->
+                    <p><a href="{% url 'cars' %}" class="btn btn-primary py-3 px-4">Change Car</a></p>
+                </div>
+                </div>
+                
+
+
+                <h4>Recomended!</h4>
+                <div class="carousel-car owl-carousel">
+                  {% for car in allcars %}
+                  {% if car.carType == cars.carType %}
+                  <div class="item">
+                    <div class="car-wrap rounded ftco-animate">
+                      <div class="img rounded d-flex align-items-end car1" style="height: 130px;">
+                        <img src="{{ car.carImg.url }}" alt="">
+                      
+                      </div>
+                      <div class="text">
+                        <h2 class="mb-0"><a href="#"> {{ car.model }} </a></h2>
+                        
+                        <div class="d-flex mb-3">
+                          <span class="cat">{{ car.make }} </span>
+                          <p class="price ml-auto">{{ car.rentAmount }}<span> /day</span></p>
+                        </div>
+                        <p class="d-flex mb-0 d-block">
+        
+                          
+                          <a href="{% url 'carDetails' id=car.id %}" class="btn btn-secondary py-2 ml-1">Details</a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  {% endif %}
+                  {% endfor %}
+                </div>
+
               </div>
             </div>
           </div>
       </div>
     </div>
   </section>
+
+  <!-- Your form content -->
+
+<script>
+    document.getElementById('paymentForm').addEventListener('submit', function (event) {
+        var checkbox = document.getElementById('form2Example3c');
+
+        // Check if the checkbox is selected
+        if (!checkbox.checked) {
+            alert('Please agree to the Terms and Conditions before submitting.');
+            event.preventDefault();  // Prevent form submission
+        }
+    });
+</script>
 
 
   {% endblock %}

@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
+from phonenumber_field.modelfields import PhoneNumberField
+# from home.models import Cars
 
 
 # Create your models here.
@@ -7,21 +9,20 @@ from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
 
 class MyAccountManager(BaseUserManager):
     
-    def create_user(self,first_name ,last_name ,username, email ,password=None):#Information about the user|| The user's password, which defaults to None to allow for users without a password (e.g., social media logins).
+    def create_user(self,first_name ,last_name ,username, email ,password=None):
 
-        if not email :
+        if not email:
             raise ValueError('User must have an email address')
-        #The method checks if email and username are provided. If not, it raises ValueError with a message indicating that an email address and username are required.
         if not username:
             raise ValueError('User must have an username') 
         
-        user = self.model(#self.model= it's an attribute that you define in your custom manager to specify the user model associated with that manager
-            email = self.normalize_email(email), #enter any capital letter email the  normalize_email make to smalletter
+        user = self.model(
+            email = self.normalize_email(email), 
             username = username,
             first_name = first_name,
             last_name = last_name,  
         )
-        user.set_password(password)#making hashed password
+        user.set_password(password)
         user.save(using = self._db)
         # print(user.password)
         return user
@@ -60,8 +61,8 @@ class Registerinfo(AbstractBaseUser):
     is_active = models.BooleanField(default=False)
     is_superadmin = models.BooleanField(default=False)
     
-    USERNAME_FIELD = 'email' # we can able to login with email in username field  or username insted of email
-    REQUIRED_FIELDS = ['username','first_name'  ,'last_name',] 
+    USERNAME_FIELD = 'email' 
+    REQUIRED_FIELDS = ['username','first_name','last_name',] 
     
     
     objects = MyAccountManager()
@@ -74,16 +75,54 @@ class Registerinfo(AbstractBaseUser):
     
  
     def __str__(self):
-        return self.email
+        return f"{self.email}"
     
-    def has_perm(self,perm,obj=None):# a person is_admin he can all permitons to change everything 
+    def has_perm(self,perm,obj=None):
         return self.is_admin
     
-    def has_module_perms(self,add_label):# Check if the user has the appropriate permissions for the module
+    def has_module_perms(self,add_label):
         return True
+    
+    
+    
+    
+
+
+class Profile(models.Model):
+    
+    
+    
+    GENDER=[
+        ('M','M'),
+        ('F','F'),
+        ('TRANS','TRANS'),
+    ]
+  
+    
+    user = models.OneToOneField(Registerinfo, on_delete=models.CASCADE, related_name='profile',null=True,blank=True)
+    address = models.CharField(max_length=100,null=True)
+    mobile = PhoneNumberField(null=True)
+    gender = models.CharField(max_length=10,choices=GENDER,null=True)
+    age = models.IntegerField(null=True)
+    education = models.CharField(max_length=50,null=True)
+    state = models.CharField(max_length=30,null=True)
+    city = models.CharField(max_length=40,null=True)
+    profilePic = models.ImageField(upload_to='media/userimages',null=True,blank=True)
+    
+    
+    
+    class Meta:
+        verbose_name = 'Profile'
+        verbose_name_plural = 'Profile Update'
+        
+    def __str__(self):
+        return f"{self.user}  {self.mobile}"
+        
+    
 
 
 
+    
 
 
 
