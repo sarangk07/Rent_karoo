@@ -4,22 +4,21 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('users', '0002_registerinfo_groups_registerinfo_is_superuser_and_more'),
+        ("users", "0002_registerinfo_groups_registerinfo_is_superuser_and_more"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='registerinfo',
-            name='groups',
+            model_name="registerinfo",
+            name="groups",
         ),
         migrations.RemoveField(
-            model_name='registerinfo',
-            name='is_superuser',
+            model_name="registerinfo",
+            name="is_superuser",
         ),
         migrations.RemoveField(
-            model_name='registerinfo',
-            name='user_permissions',
+            model_name="registerinfo",
+            name="user_permissions",
         ),
     ]

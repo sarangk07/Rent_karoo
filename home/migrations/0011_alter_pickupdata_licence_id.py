@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('home', '0010_alter_pickupdata_options_pickupdata_user'),
+        ("home", "0010_alter_pickupdata_options_pickupdata_user"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='pickupdata',
-            name='licence_ID',
+            model_name="pickupdata",
+            name="licence_ID",
             field=models.CharField(max_length=50),
         ),
     ]

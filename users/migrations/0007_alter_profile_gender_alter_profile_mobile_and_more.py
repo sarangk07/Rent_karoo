@@ -7,30 +7,43 @@ import phonenumber_field.modelfields
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('users', '0006_alter_profile_options_alter_profile_address_and_more'),
+        ("users", "0006_alter_profile_options_alter_profile_address_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='profile',
-            name='gender',
-            field=models.CharField(choices=[('M', 'M'), ('F', 'F'), ('TRANS', 'TRANS')], max_length=10, null=True),
+            model_name="profile",
+            name="gender",
+            field=models.CharField(
+                choices=[("M", "M"), ("F", "F"), ("TRANS", "TRANS")],
+                max_length=10,
+                null=True,
+            ),
         ),
         migrations.AlterField(
-            model_name='profile',
-            name='mobile',
-            field=phonenumber_field.modelfields.PhoneNumberField(max_length=128, null=True, region=None),
+            model_name="profile",
+            name="mobile",
+            field=phonenumber_field.modelfields.PhoneNumberField(
+                max_length=128, null=True, region=None
+            ),
         ),
         migrations.AlterField(
-            model_name='profile',
-            name='profilePic',
-            field=models.ImageField(blank=True, null=True, upload_to='media/userimages'),
+            model_name="profile",
+            name="profilePic",
+            field=models.ImageField(
+                blank=True, null=True, upload_to="media/userimages"
+            ),
         ),
         migrations.AlterField(
-            model_name='profile',
-            name='user',
-            field=models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='profile', to=settings.AUTH_USER_MODEL),
+            model_name="profile",
+            name="user",
+            field=models.OneToOneField(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="profile",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

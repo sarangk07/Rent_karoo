@@ -4,25 +4,24 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('home', '0014_payment_is_paid'),
+        ("home", "0014_payment_is_paid"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='payment',
-            name='razorpay_order_id',
+            model_name="payment",
+            name="razorpay_order_id",
             field=models.CharField(blank=True, max_length=500, null=True),
         ),
         migrations.AlterField(
-            model_name='payment',
-            name='razorpay_payment_id',
+            model_name="payment",
+            name="razorpay_payment_id",
             field=models.CharField(blank=True, max_length=500, null=True),
         ),
         migrations.AlterField(
-            model_name='payment',
-            name='razorpay_payment_signature',
+            model_name="payment",
+            name="razorpay_payment_signature",
             field=models.CharField(blank=True, max_length=500, null=True),
         ),
     ]

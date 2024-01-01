@@ -6,20 +6,23 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('home', '0009_alter_pickupdata_mobile_number'),
+        ("home", "0009_alter_pickupdata_mobile_number"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='pickupdata',
-            options={'verbose_name': 'PickupData', 'verbose_name_plural': 'Bookings'},
+            name="pickupdata",
+            options={"verbose_name": "PickupData", "verbose_name_plural": "Bookings"},
         ),
         migrations.AddField(
-            model_name='pickupdata',
-            name='user',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="pickupdata",
+            name="user",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

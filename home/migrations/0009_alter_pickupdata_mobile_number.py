@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('home', '0008_alter_pickupdata_car'),
+        ("home", "0008_alter_pickupdata_car"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='pickupdata',
-            name='mobile_number',
+            model_name="pickupdata",
+            name="mobile_number",
             field=models.BigIntegerField(),
         ),
     ]

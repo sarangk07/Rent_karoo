@@ -227,7 +227,50 @@ h5,
                             </p>
                         </div>
                         <div class="d-flex justify-content-between mb-2">
+                            <p class="text-muted">Selected Plan</p>
+                            <p class="fs-14 fw-bold">{{ selected_plan }}</p>
+                            {% if cars.carType == 'SUV' %}
+
+                                {% if selected_plan == 'Silver' %}
+                                    <p class="fs-14 fw-bold">900</p>
+                                {% elif selected_plan == 'Gold' %}
+                                    <p class="fs-14 fw-bold">1300</p>
+                                {% elif selected_plan == 'Diamond' %}
+                                    <p class="fs-14 fw-bold">1500</p>
+                                {% else %}
+                                    <p class="fs-14 fw-bold">Unknown Plan</p>
+                                {% endif %}
+
+                            {% elif cars.carType == 'Sedan' %}
+
+                                {% if selected_plan == 'Silver' %}
+                                    <p class="fs-14 fw-bold">850</p>
+                                {% elif selected_plan == 'Gold' %}
+                                    <p class="fs-14 fw-bold">1200</p>
+                                {% elif selected_plan == 'Diamond' %}
+                                    <p class="fs-14 fw-bold">1400</p>
+                                {% else %}
+                                    <p class="fs-14 fw-bold">Unknown Plan</p>
+                                {% endif %}
+
+                            {% elif cars.carType == 'Hatchback' %}
+
+                                {% if selected_plan == 'Silver' %}
+                                    <p class="fs-14 fw-bold">800</p>
+                                {% elif selected_plan == 'Gold' %}
+                                    <p class="fs-14 fw-bold">1100</p>
+                                {% elif selected_plan == 'Diamond' %}
+                                    <p class="fs-14 fw-bold">1300</p>
+                                {% else %}
+                                    <p class="fs-14 fw-bold">Unknown Plan</p>
+                                {% endif %}
+
+                            {% endif %}
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mb-2">
                             <p class="textmuted">TAX GST</p>
+                            <p class="textmuted">5%</p>
                             <p class="fs-14 fw-bold">{{gst}}</p>
                         </div>
                         
@@ -303,7 +346,7 @@ h5,
             "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
             "handler": function (response){
                 console.log('success!')
-
+                alert("Payment Details was sended to your mail! {{pickup_data.user.email}}");
                 var razorpay_payment_id = response.razorpay_payment_id;
                 var razorpay_signature = response.razorpay_signature;
 

@@ -6,29 +6,38 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('home', '0018_wishlist_wishlist_items'),
+        ("home", "0018_wishlist_wishlist_items"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='wishlist',
-            name='wishlist_items',
+            model_name="wishlist",
+            name="wishlist_items",
         ),
         migrations.RemoveField(
-            model_name='wishlist',
-            name='wish_car',
+            model_name="wishlist",
+            name="wish_car",
         ),
         migrations.AlterField(
-            model_name='wishlist',
-            name='wish_user',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="wishlist",
+            name="wish_user",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.AddField(
-            model_name='wishlist',
-            name='wish_car',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='home.cars'),
+            model_name="wishlist",
+            name="wish_car",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="home.cars",
+            ),
         ),
     ]

@@ -19,7 +19,6 @@ CarsViews
 		<ul class="navbar-nav ml-auto">
 		  <li class="nav-item active"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
 		  <li class="nav-item"><a href="{% url 'cars' %}" class="nav-link">Cars</a></li>
-		  
 		  <li class="nav-item"><a href="{% url 'dashbord' %}" class="nav-link"><img src="https://www.freeiconspng.com/uploads/profile-icon-1.png" width="35" height="35" alt="Free High quality Profile Icon" /></a></li>
 
 
@@ -141,7 +140,7 @@ CarsViews
 							      <a class="nav-link" id="pills-manufacturer-tab" data-toggle="pill" href="#pills-manufacturer" role="tab" aria-controls="pills-manufacturer" aria-expanded="true">Description</a>
 							    </li>
 							    <li class="nav-item">
-							      <a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab" aria-controls="pills-review" aria-expanded="true">Review</a>
+							      <a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab" aria-controls="pills-review" aria-expanded="true">Plans</a>
 							    </li>
 							  </ul>
 							</div>
@@ -194,6 +193,95 @@ CarsViews
 						    <div class="tab-pane fade" id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
 						      <p>{{cars.description}}</p>
 						    </div>
+
+							<div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
+								<div class="row ftco-animate">
+									<div class="col-md-12">
+									  <div class="carousel-testimony owl-carousel ftco-owl">
+										<div class="item">
+										  <div class="testimony-wrap rounded text-center py-4 pb-5">
+											<div class="user-img mb-2 flaticon-car">
+											</div>
+											<div class="text pt-4">
+											  <span class="position">Basic</span>
+											  <p class="mb-4">
+												- Covers damage to the rental vehicle caused by collision, theft, or vandalism.<br>
+												- May have a deductible, which is the amount the customer is responsible for paying before the insurance coverage kicks in.<br>
+												- Typically the most affordable option
+											  </p>
+											  <div class="btn btn-disable btn-success">
+											  {% if cars.carType == 'SUV' %}
+											  	<p>price: 900</p>
+											  {% elif cars.carType == 'Hatchback' %}
+											  	<p>price: 800</p>
+											  {% elif cars.carType == 'Sedan' %}
+											  	<p>price: 850</p>
+											  {% else %}
+											  	<p>price: 700</p>
+											  {% endif %}
+											</div>
+											</div>
+										  </div>
+										</div>
+										<div class="item">
+										  <div class="testimony-wrap rounded text-center py-4 pb-5">
+											<div class="user-img mb-2 flaticon-car" >
+											</div>
+											<div class="text pt-4">
+											  <span class="position">Premium</span>
+											  <p class="mb-4">
+												- Provides more comprehensive coverage than the basic plan, including damage to the rental vehicle caused by natural disasters, riots, or acts of terrorism.<br>
+												- May also cover personal belongings of the customer that are damaged or stolen while in the rental vehicle.<br>
+												- Typically more expensive than the basic plan.               
+											  </p>
+											  <div class="btn btn-disable btn-success">
+											  {% if cars.carType == 'SUV' %}
+											  	<p>price: 1300</p>
+											  {% elif cars.carType == 'Hatchback' %}
+											  	<p>price: 1100</p>
+											  {% elif cars.carType == 'Sedan' %}
+											  	<p>price: 1200</p>
+											  {% else %}
+											  	<p>price: 1000</p>
+											  {% endif %}
+											</div>
+											
+											</div>
+										  </div>
+										</div>
+										<div class="item">
+										  <div class="testimony-wrap rounded text-center py-4 pb-5">
+											<div class="user-img mb-2 flaticon-car">
+											</div>
+											<div class="text pt-4">
+											  <span class="position">Diamond</span>
+											  <p class="mb-4">
+												- Provides 24/7 roadside assistance, including towing, flat tire repair, fuel delivery, and lockout assistance. <br>
+												- May also include trip interruption coverage, which reimburses the customer for expenses incurred if their trip is interrupted due to a covered event.<br>
+												- Typically offered as an optional add-on to the basic or premium plan.
+											 
+											  </p>
+
+											  <div class="btn btn-disable btn-success">
+											  {% if cars.carType == 'SUV' %}
+											  	<p>price: 1500</p>
+											  {% elif cars.carType == 'Hatchback' %}
+											  	<p>price: 1300</p>
+											  {% elif cars.carType == 'Sedan' %}
+											  	<p>price: 1400</p>
+											  {% else %}
+											  	<p>price: 1100</p>
+											  {% endif %}
+											</div>
+
+											</div>
+										  </div>
+										</div>
+										
+									  </div>
+									</div>
+								  </div>
+							</div>
 
 						  </div>
 						</div>

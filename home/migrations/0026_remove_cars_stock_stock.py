@@ -5,22 +5,34 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('home', '0025_alter_cars_carnumber'),
+        ("home", "0025_alter_cars_carnumber"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='cars',
-            name='stock',
+            model_name="cars",
+            name="stock",
         ),
         migrations.CreateModel(
-            name='Stock',
+            name="Stock",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('stock', models.PositiveIntegerField(default=0)),
-                ('variant', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='home.cars')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("stock", models.PositiveIntegerField(default=0)),
+                (
+                    "variant",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="home.cars"
+                    ),
+                ),
             ],
         ),
     ]

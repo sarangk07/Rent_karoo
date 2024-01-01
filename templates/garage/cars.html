@@ -96,6 +96,16 @@ small.justify-content-center{
 			</div>
 		  </li>
   
+		  <li class="nav-item dropdown ml-3">
+			<a class="btn btn-primary dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Sort
+			</a>
+			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<a class="dropdown-item" href="{% url 'priceSorting' sort_type='price_low_to_high' %}">price low-to-high</a>
+				<a class="dropdown-item" href="{% url 'priceSorting' sort_type='price_high_to_low' %}">price high-to-low</a>
+				<a class="dropdown-item" href="{% url 'priceSorting' sort_type='below_500' %}">Below 500</a>
+			</div>
+		  </li>
 		  {% if user.id is none %}
 			<li class="nav-item">
 			  <a class="nav-link" href="{% url 'login' %}" type="button">Login</a>
@@ -108,13 +118,13 @@ small.justify-content-center{
 		</ul>
 	  </div>
 	</div>
-  </nav>
+</nav>
   
   
 
 
 
-  <br>
+<br>
 <div class="container-fluid d-flex justify-content-center bg-dark">
 	
 	<div class="row mt-5">

@@ -6,59 +6,66 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('users', '0005_profile'),
+        ("users", "0005_profile"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='profile',
-            options={'verbose_name': 'Profile', 'verbose_name_plural': 'Profile Update'},
+            name="profile",
+            options={
+                "verbose_name": "Profile",
+                "verbose_name_plural": "Profile Update",
+            },
         ),
         migrations.AlterField(
-            model_name='profile',
-            name='address',
+            model_name="profile",
+            name="address",
             field=models.CharField(max_length=100, null=True),
         ),
         migrations.AlterField(
-            model_name='profile',
-            name='age',
+            model_name="profile",
+            name="age",
             field=models.IntegerField(null=True),
         ),
         migrations.AlterField(
-            model_name='profile',
-            name='city',
+            model_name="profile",
+            name="city",
             field=models.CharField(max_length=40, null=True),
         ),
         migrations.AlterField(
-            model_name='profile',
-            name='education',
+            model_name="profile",
+            name="education",
             field=models.CharField(max_length=50, null=True),
         ),
         migrations.AlterField(
-            model_name='profile',
-            name='gender',
+            model_name="profile",
+            name="gender",
             field=models.CharField(max_length=10, null=True),
         ),
         migrations.AlterField(
-            model_name='profile',
-            name='mobile',
+            model_name="profile",
+            name="mobile",
             field=models.BigIntegerField(null=True),
         ),
         migrations.AlterField(
-            model_name='profile',
-            name='profilePic',
-            field=models.ImageField(null=True, upload_to='media/userimages'),
+            model_name="profile",
+            name="profilePic",
+            field=models.ImageField(null=True, upload_to="media/userimages"),
         ),
         migrations.AlterField(
-            model_name='profile',
-            name='state',
+            model_name="profile",
+            name="state",
             field=models.CharField(max_length=30, null=True),
         ),
         migrations.AlterField(
-            model_name='profile',
-            name='user',
-            field=models.OneToOneField(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='profile', to=settings.AUTH_USER_MODEL),
+            model_name="profile",
+            name="user",
+            field=models.OneToOneField(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="profile",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

@@ -22,14 +22,6 @@ Pickup Details
               <form action="{% url 'payment' id=cars.id %}" class="request-form ftco-animate bg-primary" method="post">
                 {% csrf_token %}
                 <h2>Make your trip</h2>
-                <!-- <div class="form-group">
-                  <label for="" class="label">Pick-up location</label>
-                  <input type="text" class="form-control" placeholder="City, Airport, Station, etc">
-                </div>
-                <div class="form-group">
-                  <label for="" class="label">Drop-off location</label>
-                  <input type="text" class="form-control" placeholder="City, Airport, Station, etc">
-                </div> -->
                 <div class="form-group">
                   <label for="" class="label">Name</label>
                   <p class="form-control">{{users.first_name}}</p>
@@ -49,6 +41,18 @@ Pickup Details
                   <label for="" class="label">Pick-up time</label>
                   <input type="text" class="form-control" id="time_pick" placeholder="Time" name="pickuptime">
                 </div>
+
+                <div class="form-group">
+                  <label for="" class="label">Pickup-place</label>
+                  <select class="form-control" name="pLocation">
+                    <option value="Kozhikode" name="pLocation">Kozhikode</option>
+                </select>
+                </div>
+
+
+
+
+
                 <div class="form-group">
                   <label for="" class="label">Email</label>
                   <input type="text" class="form-control" id="time_pick" placeholder="Email" name="email">
@@ -59,7 +63,7 @@ Pickup Details
                 </div>
                 <div class="form-group">
                   <label for="" class="label">Licence ID</label>
-                  <input type="text" class="form-control" id="time_pick" placeholder="Licence" name="licence">
+                  <input type="text" class="form-control" id="time_pick" placeholder="eg:KA12AB1234" name="licence">
                 </div>
 
 
@@ -70,9 +74,9 @@ Pickup Details
                 <div class="form-group">
                   <label for="" class="label">Select Insurance & Protection Plans</label>
                   <select class="form-control" name="selected_plan">
-                      <option value="basic">Basic Plan</option>
-                      <option value="premium">Premium Plan</option>
-                      <option value="diamond">Diamond Plan</option>
+                      <option value="Silver">Silver Plan</option>
+                      <option value="Gold">Gold Plan</option>
+                      <option value="Diamond">Diamond Plan</option>
                   </select>
                 </div>
 
@@ -156,7 +160,7 @@ Pickup Details
                     <div class="services w-100 text-center">
                       <a href=""><div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div></a>
                       <div class="text w-100">
-                        <h3 class="heading mb-2">Basic Plan</h3>
+                        <h3 class="heading mb-2">Silver Plan</h3>
                       </div>
                     </div>      
                   </div>
@@ -164,7 +168,7 @@ Pickup Details
                     <div class="services w-100 text-center">
                       <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-handshake"></span></div>
                       <div class="text w-100">
-                        <h3 class="heading mb-2">Premium Plan</h3>
+                        <h3 class="heading mb-2">Gold Plan</h3>
                       </div>
                     </div>      
                   </div>

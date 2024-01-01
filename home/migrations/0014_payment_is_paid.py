@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('home', '0013_cars_in_garage'),
+        ("home", "0013_cars_in_garage"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='payment',
-            name='is_paid',
+            model_name="payment",
+            name="is_paid",
             field=models.BooleanField(default=False),
         ),
     ]

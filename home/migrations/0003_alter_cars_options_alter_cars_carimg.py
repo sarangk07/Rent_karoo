@@ -4,19 +4,18 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('home', '0002_alter_cars_carimg'),
+        ("home", "0002_alter_cars_carimg"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='cars',
-            options={'verbose_name': 'Cars', 'verbose_name_plural': 'cars'},
+            name="cars",
+            options={"verbose_name": "Cars", "verbose_name_plural": "cars"},
         ),
         migrations.AlterField(
-            model_name='cars',
-            name='carImg',
-            field=models.ImageField(upload_to='media/carimages'),
+            model_name="cars",
+            name="carImg",
+            field=models.ImageField(upload_to="media/carimages"),
         ),
     ]

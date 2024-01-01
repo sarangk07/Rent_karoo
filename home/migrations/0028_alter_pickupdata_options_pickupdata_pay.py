@@ -4,19 +4,21 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('home', '0027_rename_stock_stock_quantity'),
+        ("home", "0027_rename_stock_stock_quantity"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='pickupdata',
-            options={'verbose_name': 'PickupData', 'verbose_name_plural': 'Bookings Details'},
+            name="pickupdata",
+            options={
+                "verbose_name": "PickupData",
+                "verbose_name_plural": "Bookings Details",
+            },
         ),
         migrations.AddField(
-            model_name='pickupdata',
-            name='pay',
+            model_name="pickupdata",
+            name="pay",
             field=models.BooleanField(default=False),
         ),
     ]

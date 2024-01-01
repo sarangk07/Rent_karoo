@@ -4,15 +4,24 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('home', '0003_alter_cars_options_alter_cars_carimg'),
+        ("home", "0003_alter_cars_options_alter_cars_carimg"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='cars',
-            name='carType',
-            field=models.CharField(choices=[('SUV', 'SUV'), ('MPV', 'MPV'), ('EV', 'EV'), ('Sedan', 'Sedan'), ('Hatchback', 'Hatchback')], default='', max_length=20),
+            model_name="cars",
+            name="carType",
+            field=models.CharField(
+                choices=[
+                    ("SUV", "SUV"),
+                    ("MPV", "MPV"),
+                    ("EV", "EV"),
+                    ("Sedan", "Sedan"),
+                    ("Hatchback", "Hatchback"),
+                ],
+                default="",
+                max_length=20,
+            ),
         ),
     ]

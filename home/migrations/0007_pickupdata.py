@@ -5,22 +5,34 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('home', '0006_alter_cars_rc_expired_date'),
+        ("home", "0006_alter_cars_rc_expired_date"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='PickupData',
+            name="PickupData",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('Pickup_time', models.TimeField()),
-                ('pickup_date', models.DateField()),
-                ('dropoff_date', models.DateField()),
-                ('mobile_number', models.IntegerField()),
-                ('licence_ID', models.CharField(max_length=50, unique=True)),
-                ('car', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='home.cars')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("Pickup_time", models.TimeField()),
+                ("pickup_date", models.DateField()),
+                ("dropoff_date", models.DateField()),
+                ("mobile_number", models.IntegerField()),
+                ("licence_ID", models.CharField(max_length=50, unique=True)),
+                (
+                    "car",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="home.cars"
+                    ),
+                ),
             ],
         ),
     ]

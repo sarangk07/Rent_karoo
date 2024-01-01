@@ -4,14 +4,13 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('users', '0003_remove_registerinfo_groups_and_more'),
+        ("users", "0003_remove_registerinfo_groups_and_more"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='registerinfo',
-            options={'verbose_name': 'registerinfo', 'verbose_name_plural': 'users'},
+            name="registerinfo",
+            options={"verbose_name": "registerinfo", "verbose_name_plural": "users"},
         ),
     ]
