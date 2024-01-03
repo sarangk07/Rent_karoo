@@ -2,82 +2,239 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
 
-    
-    
-    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'website/css/open-iconic-bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'website/css/animate.css' %}">
-    <link rel="stylesheet" href="{% static 'website/css/owl.carousel.min.css' %}">
-    <link rel="stylesheet" href="{% static 'website/css/owl.theme.default.min.css' %}">
-    <link rel="stylesheet" href="{% static 'website/css/magnific-popup.css' %}">
-    <link rel="stylesheet" href="{% static 'website/css/aos.css' %}">
-    <link rel="stylesheet" href="{% static 'website/css/ionicons.min.css' %}">
-    <link rel="stylesheet" href="{% static 'website/css/bootstrap-datepicker.css' %}">
-    <link rel="stylesheet" href="{% static 'website/css/jquery.timepicker.css' %}">
-    <link rel="stylesheet" href="{% static 'website/css/flaticon.css' %}">
-    <link rel="stylesheet" href="{% static 'website/css/icomoon.css' %}">
-    <link rel="stylesheet" href="{% static 'website/css/style.css' %}">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
 
-    
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'website/css/open-iconic-bootstrap.min.css' %}"
+    />
+    <link rel="stylesheet" href="{% static 'website/css/animate.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'website/css/owl.carousel.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'website/css/owl.theme.default.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'website/css/magnific-popup.css' %}"
+    />
+    <link rel="stylesheet" href="{% static 'website/css/aos.css' %}" />
+    <link rel="stylesheet" href="{% static 'website/css/ionicons.min.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'website/css/bootstrap-datepicker.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'website/css/jquery.timepicker.css' %}"
+    />
+    <link rel="stylesheet" href="{% static 'website/css/flaticon.css' %}" />
+    <link rel="stylesheet" href="{% static 'website/css/icomoon.css' %}" />
+    <link rel="stylesheet" href="{% static 'website/css/style.css' %}" />
 
     <style>
-        .backgroundcar{
-            background-image: url('{% static "website/images/bg_1.jpg" %}')
-        }
-        .car1{
-            background-image: url('{% static "website/images/car-1.jpg" %}')
-        }
-        .car2{
-            background-image: url('{% static "website/images/car-2.jpg" %}')
-        }
-        .car3{
-            background-image: url('{% static "website/images/car-3.jpg" %}')
-        }
-        .car4{
-            background-image: url('{% static "website/images/car-4.jpg" %}')
-        }
-        .about{
-            background-image: url('{% static "website/images/about.jpg" %}' )
-        }
-        .background3{
-            background-image: url('{% static "website/images/bg_3.jpg" %}')
-        }
-        .person1{
-            background-image: url('{% static "website/images/person_1.jpg" %}')
-        }
-        .person2{
-            background-image: url('{% static "website/images/person_2.jpg" %}')
-        }
-        .person3{
-            background-image: url('{% static "website/images/person_3.jpg" %}')
-        }
-        .img1{
-            background-image: url('{% static "website/images/image_1.jpg" %}')
-        }
-        .img2{
-            background-image: url('{% static "website/images/image_2.jpg" %}')
-        }
-        .img3{
-            background-image: url('{% static "website/images/image_3.jpg" %}')
-        }
-      </style>
+      .backgroundcar {
+        background-image: url('{% static "website/images/bg_1.jpg" %}');
+      }
+      .car1 {
+        background-image: url('{% static "website/images/car-1.jpg" %}');
+      }
+      .car2 {
+        background-image: url('{% static "website/images/car-2.jpg" %}');
+      }
+      .car3 {
+        background-image: url('{% static "website/images/car-3.jpg" %}');
+      }
+      .car4 {
+        background-image: url('{% static "website/images/car-4.jpg" %}');
+      }
+      .about {
+        background-image: url('{% static "website/images/about.jpg" %}');
+      }
+      .background3 {
+        background-image: url('{% static "website/images/bg_3.jpg" %}');
+      }
+      .person1 {
+        background-image: url('{% static "website/images/person_1.jpg" %}');
+      }
+      .person2 {
+        background-image: url('{% static "website/images/person_2.jpg" %}');
+      }
+      .person3 {
+        background-image: url('{% static "website/images/person_3.jpg" %}');
+      }
+      .img1 {
+        background-image: url('{% static "website/images/image_1.jpg" %}');
+      }
+      .img2 {
+        background-image: url('{% static "website/images/image_2.jpg" %}');
+      }
+      .img3 {
+        background-image: url('{% static "website/images/image_3.jpg" %}');
+      }
 
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          color: aliceblue;
+        }
+        50% {
+          color: blue;
+        }
+      }
+
+      @keyframes nudge {
+        0%,
+        100% {
+          color: aqua;
+          transform: translate(0, 0);
+        }
+
+        50% {
+          color: rgb(255, 138, 5);
+          transform: translate(250px, 0);
+        }
+
+        80% {
+          color: blue;
+          transform: translate(350px, 0);
+        }
+      }
+      @keyframes alpha {
+        0%,
+        100% {
+          color: rgb(252, 251, 250);
+          transform: translate(-50, 0);
+        }
+
+        50% {
+          color: rgb(216, 253, 5);
+          transform: translate(250px, 0);
+        }
+
+        0% {
+          color: rgb(251, 252, 251);
+          transform: translate(350px, 0);
+        }
+      }
+
+      @keyframes premium {
+        0%,
+        100% {
+          color: rgb(247, 248, 248);
+          transform: translate(100, 0);
+        }
+
+        50% {
+          color: rgb(255, 5, 5);
+          transform: translate(50px, 0);
+        }
+
+        80% {
+          color: rgb(253, 253, 253);
+          transform: translate(0px, 0);
+        }
+      }
+
+
+  @keyframes ball {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-100px); /* Adjusted for higher bounce */
+  }
+
+  60% {
+    transform: translateY(-50px); /* Adjusted for higher bounce */
+  }
+}
+
+
+
+.ball {
+  width: 100px;
+  height: 40px;
+  /* Coral color */
+  /* border-radius: 50%; */
+  animation: bounce 2s infinite ease-in-out;
+}
+/* .ball:active{
+  animation: pulse 3s ease infinite alternate,
+   
+  nudge 4s linear infinite alternate;
+} */
+
+
+
+
+
+
+    .kar{
+      animation: alpha 3s infinite linear;
+    }
+    .premium{
+      animation: premium 3s infinite alternate,
+      nudge 2s linear infinite alternate;
+    }
+
+    .braaand{
+        color: antiquewhite;
+    }
+      .rotate {
+        display: inline-block;
+        animation: spin 1s infinite linear; 
+      }
+      .rotate:hover {
+        animation: pulse 3s ease infinite alternate,
+          nudge 4s linear infinite alternate;
+        border-radius: 100%;
+      }
+      .car-tire {
+        /* Add styling for the car tire, for example: */
+        display: inline-block;
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #333; /* Adjust the color */
+      }
+    </style>
 
     <title>{% block title %}Default Title{% endblock %}</title>
-
-
-</head>
-<body>
-  <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  </head>
+  <body>
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Rent_Kar o!</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -111,24 +268,19 @@
     </div>
 </nav> -->
 
-
-
-
-
-    {% block content %}
-
-
-
-
-    {% endblock %}
+    {% block content %} {% endblock %}
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    
 
     <!-- index.html import -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
 
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
     <script src="{% static 'website/js/jquery.min.js' %}"></script>
     <script src="{% static 'website/js/jquery-migrate-3.0.1.min.js' %}"></script>
     <script src="{% static 'website/js/popper.min.js' %}"></script>
@@ -147,20 +299,20 @@
     <script src="{% static 'website/js/google-map.js' %}"></script>
     <script src="{% static 'website/js/main.j' %}s"></script>
 
-
     <script>
-        document.getElementById('paymentForm').addEventListener('submit', function (event) {
-            var checkbox = document.getElementById('form2Example3c');
-    
-            // Check if the checkbox is selected
-            if (!checkbox.checked) {
-                alert('Please agree to the Terms and Conditions before submitting.');
-                event.preventDefault();  // Prevent form submission
-            }
+      document
+        .getElementById("paymentForm")
+        .addEventListener("submit", function (event) {
+          var checkbox = document.getElementById("form2Example3c");
+
+          // Check if the checkbox is selected
+          if (!checkbox.checked) {
+            alert(
+              "Please agree to the Terms and Conditions before submitting."
+            );
+            event.preventDefault(); // Prevent form submission
+          }
         });
     </script>
-
-
-
-</body>
+  </body>
 </html>

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from home.models import Cars, PickupData, Payment, Wishlist
-from users.models import Registerinfo
+from users.models import Registerinfo,Profile
 
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
@@ -36,8 +36,18 @@ from django.core.paginator import Paginator
 # home page
 def home(request):
     cars = Cars.objects.filter(is_available=True)
-    print(cars)
-    context = {"cars": cars}
+    
+    
+    if request.user.is_authenticated:
+        try:
+            profuser = get_object_or_404(Profile, user=request.user)
+            context = {"cars": cars, "profuser": profuser}
+        except:
+            context = {"cars": cars}
+            return render(request, "index.html", context)
+    else:    
+        print(cars)
+        context = {"cars": cars}
     return render(request, "index.html", context)
 
 
@@ -85,7 +95,7 @@ def cars(request):
     cars = Cars.objects.filter(is_available=True)
 
     print("*-/*-/-*-*-*-///-*/*", cars)
-    paginator = Paginator(cars, 5)
+    paginator = Paginator(cars, 6)
     page = request.GET.get("page")
     paged_product = paginator.get_page(page)
 
@@ -230,6 +240,7 @@ def termsandConditions(request):
 
 
 # payment
+
 @login_required(login_url="login")
 def payment(request, id):
     try:

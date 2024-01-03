@@ -115,13 +115,31 @@ CarsViews
             <div class="media block-6 services">
               <div class="media-body py-md-4">
               	<div class="d-flex mb-3 align-items-center">
+					{% if cars.fuel == 'Electric' %}
+					<div class="icon d-flex align-items-center justify-content-center">
+						<lord-icon
+							src="https://cdn.lordicon.com/grcrdebf.json"
+							trigger="hover"
+							style="width:60px;height:60px">
+						</lord-icon>
+					</div>
+					<div class="text">
+					  <h3 class="heading mb-0 pl-3">
+						  Fuel
+						  <span>{{cars.fuel}}</span>
+						  
+					  </h3>
+				  </div>
+					{% else %}
 	              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-diesel"></span></div>
 	              	<div class="text">
 		                <h3 class="heading mb-0 pl-3">
 		                	Fuel
 		                	<span>{{cars.fuel}}</span>
+							
 		                </h3>
 	                </div>
+					{% endif %}
                 </div>
               </div>
             </div>      
@@ -321,5 +339,6 @@ CarsViews
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-
+  
+  <script src="https://cdn.lordicon.com/lordicon.js"></script>
   {% endblock %}

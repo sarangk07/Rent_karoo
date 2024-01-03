@@ -50,10 +50,10 @@
           linear,
           left top,
           right top,
-          from(#f29263),
-          to(#ee5a6f)
+          from(#8d8c8c),
+          to(#080808)
         );
-        background: linear-gradient(to right, #ee5a6f, #f29263);
+        background: linear-gradient(to right, #0e0e0e, #9e9d9d);
       }
 
       .user-profile {
@@ -175,6 +175,7 @@
                     </div>
                     <h6 class="f-w-600">{{admin.first_name}}  {{admin.last_name}}</h6>
                     <p>{{admin.username}}</p>
+                   
                     <i
                       class="mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"
                     ></i>
@@ -210,6 +211,7 @@
                       <!-- Projects -->
                     </h6>
                     <div class="row">
+                      {% if userdata is not none %}
                         <div class="col-sm-3">
                           <p class="m-b-10 f-w-600">Address</p>
                           <h6 class="text-muted f-w-400">{{userdata.address}}, {{userdata.city}}, {{userdata.state}}</h6>
@@ -222,7 +224,8 @@
                           <p class="m-b-10 f-w-600">Gender</p>
                           <h6 class="text-muted f-w-400">{{userdata.gender}}</h6>
                         </div>
-                      </div>
+                      {% endif %}
+                    </div>
                     
                 
                   </div>
@@ -264,17 +267,36 @@
                     </div>
                     <h6 class="f-w-600">{{user.first_name}}  {{user.last_name}}</h6>
                     <p>{{user.username}}</p>
+                    {% if user.is_staff %}
+                      <p >Staff<p>
+                    {% else %}
+                      
+                    {% endif %}
                     <i
                       class="mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"
                     ></i>
-                    <a href="{% url 'adminuser' %}">back</a><br>
+                    <a href="{% url 'adminuser' %}">back</a><br><br>
                     {% if user.is_superadmin %}
 
                     {% else %}
-                    {% if user.is_active %}
-                      <a href="{% url 'adminblock' id=user.email %}">Block User</a>
+                    {% if user.is_block %}
+                      <a href="{% url 'adminblock' id=user.email %}">Unblock User</a><br>
                     {% else %}
-                      <a href="{% url 'adminblock' id=user.email %}">Unblock User</a>
+                      <a href="{% url 'adminblock' id=user.email %}">Block User</a><br>
+                    {% endif %}
+<br>
+                    {% if user.is_active %}
+                      <a href="{% url 'adminActive' id=user.email %}">De-Activate user</a><br>
+                    {% else %}
+                      <a href="{% url 'adminActive' id=user.email %}">Activate user</a><br>
+                    {% endif %}
+                    <br>
+
+
+                    {% if user.is_staff %}
+                      <a href="{% url 'adminStaff' id=user.email %}">Remove From Staff</a><br>
+                    {% else %}
+                      <a href="{% url 'adminStaff' id=user.email %}">Make Staff</a><br>
                     {% endif %}
 
                     {% endif %}

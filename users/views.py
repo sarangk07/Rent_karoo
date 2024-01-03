@@ -108,9 +108,6 @@ def activate(request, uidb64, token):
         return redirect("register")
 
 
-from django.shortcuts import get_object_or_404
-from django.shortcuts import get_object_or_404
-
 
 @login_required(login_url="login")
 @csrf_exempt
@@ -164,22 +161,23 @@ def user_login(request):
 
             print("-----------------------------^------------------------------")
             
-           
-            
-            
-            
-            
+
             if user is not None:
+                if users.is_block:
+                    messages.warning(request, "Your account is blocked!, please contact with us")
+                    return redirect("login")
                 login(request, user)
                 return redirect("home")
+            
             elif not users.check_password(password):
                 messages.warning(request, "Wrong password!")
                 return redirect("login")
             elif not users.is_active:
                 messages.warning(request, "Your account not activated!, please activate your account")
                 return redirect("login")
+            
             else:
-                messages.warning(request, "Your account is blocked!, please contact with us")
+                messages.warning(request, "somthing went wrong!")
                 return redirect("login")
         except Registerinfo.DoesNotExist:
             messages.warning(request, "No user found with the provided email!")
@@ -202,16 +200,16 @@ def user_logout(request):
 @login_required(login_url="login")
 def dashbord(request):
     user = Registerinfo.objects.filter(email=request.user.email)
-    print(user, "ddddddddddddddddddddddd")
-    print(request.user, "lllllllllllllllllllllllllll")
-    pickupDetails = PickupData.objects.filter(user=request.user)
+    pickupDetails = PickupData.objects.filter(user=request.user).order_by('-bookedDate') 
     pay = Payment.objects.filter(user=request.user)
 
+    
     paginator = Paginator(pickupDetails, 2)
     page = request.GET.get("page")
 
     try:
         pickupDetails = paginator.page(page)
+        print("pppppppppppppppppppaaaaaaaaaaaaaaaaaaaaaaaaaaaaagggggggggggggggggggggggggeeeeeeeeeeeeeeeeeeeeee",paginator)
     except PageNotAnInteger:
         pickupDetails = paginator.page(1)
     except EmptyPage:
@@ -251,6 +249,7 @@ def dashbord(request):
     return render(request, "user_temp/dashbord.html", context)
 
 
+
 # user forgotpassword
 def forgotpassword(request):
     if request.method == "POST":
@@ -285,6 +284,8 @@ def forgotpassword(request):
     return render(request, "user_temp/forgotpassword.html")
 
 
+
+
 # user resetPassword validation
 def resetpassword_validate(request, uidb64, token):
     try:
@@ -299,6 +300,8 @@ def resetpassword_validate(request, uidb64, token):
     else:
         messages.error(request, "The link has been expired")
         return redirect("login")
+
+
 
 
 # user resetpassword
@@ -359,7 +362,7 @@ def changePassword(request):
         password = request.POST["password1"]
         confirm_password = request.POST["password2"]
         password_regex = r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
-        # print("+++++++++++oldpassword", oldPassword,password,confirm_password)
+
 
         if oldPassword and password and confirm_password:
             if password == confirm_password:
@@ -396,3 +399,8 @@ def changePassword(request):
     else:
         print("DATA NOT FOUND")
         return render(request, "user_temp/changePassword.html")
+
+
+
+
+

@@ -8,7 +8,7 @@ Cars
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 body{
-	background: #F5F1EE;
+	background: #fcfbfb;
 	font-family: 'Roboto', sans-serif;
 }
 .card{
@@ -63,14 +63,14 @@ small.justify-content-center{
 </style>
 
 {% block content %}
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<div class="container">
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<div class="container ">
 	  <a class="navbar-brand" href="{% url 'home' %}">Rent <span>Kar o</span></a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	  </button>
   
-	  <div class="collapse navbar-collapse" id="ftco-nav">
+	  <div class="collapse navbar-collapse " id="ftco-nav">
 		<ul class="navbar-nav ml-auto">
 		  <li class="nav-item active">
 			<a href="{% url 'home' %}" class="nav-link">Home</a>
@@ -118,24 +118,85 @@ small.justify-content-center{
 		</ul>
 	  </div>
 	</div>
-</nav>
+</nav> -->
   
+
+<nav class="navbar navbar-expand-lg navbar-light  bg-gradient " style="background-color: #1f1e1e; ">
+	<a class="navbar-brand nav-link btn text-white " href="{% url 'home' %}">Rent <span class="text-success">Kar o</span></a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	  <span class="navbar-toggler-icon"></span>
+	</button>
   
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+	  <ul class="navbar-nav mr-auto">
+		<!-- <li class="nav-item active">
+		  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+		</li> -->
+		<li class="nav-item">
+			<a href="{% url 'cars' %}" class="nav-link text-white">Cars</a>
+		</li>
+		<li class="nav-item dropdown">
+		  <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			Sort
+		  </a>
+		  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			<a class="dropdown-item" href="{% url 'priceSorting' sort_type='price_low_to_high' %}">price low-to-high</a>
+			<a class="dropdown-item" href="{% url 'priceSorting' sort_type='price_high_to_low' %}">price high-to-low</a>
+			<!-- <div class="dropdown-divider"></div> -->
+			<a class="dropdown-item" href="{% url 'priceSorting' sort_type='below_500' %}">Below 500</a>
+		  </div>
+		</li>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Types
+			</a>
+			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<a class="dropdown-item" href="{% url 'sorting' car_type='SUV' %}">SUV</a>
+				<a class="dropdown-item" href="{% url 'sorting' car_type='Hatchback' %}">Hatchback</a>
+				<a class="dropdown-item" href="{% url 'sorting' car_type='Sedan' %}">Sedan</a>
+				<a class="dropdown-item" href="{% url 'sorting' car_type='Classic' %}">Classic</a>
+			</div>
+		  </li>
+	  </ul>
+	  {% if user.id is none %}
+			<li class="nav-item" style="list-style: none;">
+			  <a class="nav-link text-warning" href="{% url 'login' %}" type="button">Login</a>
+			</li>
+		  {% else %}
+			<li class="nav-item" style="list-style: none;">
+				<a class="nav-link text-white border-success" href="{% url 'dashbord' %}">{{ user.username }}</a>
+			</li>
+		{% endif %}
+
+	  <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}">
+		<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
+		<button class="btn my-2 my-sm-0 " type="submit"><lord-icon
+			src="https://cdn.lordicon.com/unukghxb.json"
+			trigger="hover"
+			style="width:40px;height:45px">
+		</lord-icon></button>
+	  
+	</form>
+	  	
+	</div>
+  </nav>
 
 
-
-<br>
 <div class="container-fluid d-flex justify-content-center bg-dark">
 	
-	<div class="row mt-5">
+	<div class="row	 mt-4">
 	{% if cars %}
 	{% for car in cars %}
-	  <div class="col-sm-4">
+	
+	  <div class="col-sm-4" style="padding: 1px; margin: 0px; ">
+	
 		<div class="card">
-	  <img src="{{ car.carImg.url }}" class="card-img-top" width="100%">
+	  <img style="height: 53vh; height: 50vh;" src="{{ car.carImg.url }}" class="card-img-top" width="100%">
 	  <div class="card-body pt-0 px-0">
 		<div class="d-flex flex-row justify-content-between mb-0 px-3">
-		  <small class="text-muted mt-1">STARTING AT</small>
+
+			<small class="text-muted mt-1" >STARTING AT</small>
+
 		  <h6>{{car.rentAmount}} /Day</h6>
 		</div>
 		<hr class="mt-2 mx-3">
@@ -186,7 +247,13 @@ small.justify-content-center{
 
 		</div>
 		<small class="text-muted key pl-3">Standard key Features</small>
+
+		{% if car.carType == 'Classic' %}
+		<div class="mx-3 mt-3 mb-2 " ><a href="{% url 'carDetails' id=car.id %}" style="border-radius: 50px 0 50px 0;" class="btn btn-primary py-2 btn-block">View</a></div>
+		{% else %}
 		<div class="mx-3 mt-3 mb-2"><a href="{% url 'carDetails' id=car.id %}" class="btn btn-secondary py-2 btn-block">Details</a></div>
+		{% endif %}
+		
 		<small class="d-flex justify-content-center text-muted">*Legal Disclaimer</small>
 	  </div>
 		</div>

@@ -5,24 +5,28 @@
 {% block title %}
 home
 {% endblock %}
-<style>
-  .hero-wrap{
-    background-image: url('{% static "website/images/bg_1.jpg" %}')
-  }
-</style>
+
+
 
 
 {% block content %}
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
   <div class="container">
-    <a class="navbar-brand" href="{% url 'home' %}">Rent <span>Kar o</span></a>
+    <a class="navbar-brand braaand" href="{% url 'home' %}">Rent <span class="kar">Kar  <span class="rotate">
+      <span class="car-tire">O</span>
+    </span>
+    </span></span></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="oi oi-menu"></span> Menu
     </button>
 
     <div class="collapse navbar-collapse" id="ftco-nav">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+        <li class="nav-item active" ><a href="{% url 'home' %}" class="nav-link" style="margin: 0px; padding: 0px;"><lord-icon
+          src="https://cdn.lordicon.com/laqlvddb.json"
+          trigger="hover"
+          style="width:40px;height:45px">
+      </lord-icon></a></li>
         <!-- <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
         <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
         <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li> -->
@@ -30,21 +34,50 @@ home
         <!-- <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
         <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li> -->
         {% if user.id is none %}
-            <li class="nav-item"><a href="{% url 'cars' %}" class="nav-link">Cars</a></li>
+            &nbsp;&nbsp;&nbsp;<li class="nav-item"><a href="{% url 'cars' %}" class="nav-link">Cars</a></li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'login' %}" type="button">Login</a>
             </li>
         {% else %}
-            <li class="nav-item"><a href="{% url 'cars' %}" class="nav-link">Cars</a></li>
+            <li class="nav-item"><a href="{% url 'cars' %}" class="nav-link" >Cars</a></li>
             <li class="nav-item">                
               <a onclick="return confirm('Are you sure you want to logout?')" class="nav-link" href="{% url 'logout' %}" type="button">Logout</a>
             </li>
+
+
+            {% if profuser.gender == "F" %}
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'dashbord' %}">{{ user.username }}</a>
+              <a class="nav-link" href="{% url 'dashbord' %}" style="margin: 0px; padding: 0px; padding-right: 15px;">
+                <lord-icon
+                  src="https://cdn.lordicon.com/qitvuzec.json"
+                  trigger="hover"
+                  style="width:40px;height:40px">
+              </lord-icon>
+              </a>
             </li>
-            {% if user.is_superadmin %}
+            {% else %}
             <li class="nav-item">
-              <a class="nav-link btn btn-secondary" href="{% url 'admindasbord' %}">admin panal</a>
+                <a class="nav-link" href="{% url 'dashbord' %}" style="margin: 0px; padding: 0px; padding-right: 15px;">
+                  <lord-icon
+                    src="https://cdn.lordicon.com/xzalkbkz.json"
+                    trigger="hover"
+                    style="width:40px;height:40px; margin-top: 0;">
+                </lord-icon>
+                </a>
+            </li>
+            {% endif %}
+
+
+
+            {% if user.is_superadmin or user.is_staff %}
+            <li class="nav-item" >
+              <a class="nav-link btn ball text-white" href="{% url 'admindasbord' %}" style="padding:0px;">
+                <lord-icon
+                src="https://cdn.lordicon.com/zorvjzqh.json"
+                trigger="hover"
+                style="width:40px;height:45px">
+            </lord-icon><p>Admin</p>
+          </a>
             </li>
             {% endif %}
         {% endif %}
@@ -76,8 +109,13 @@ home
     <div class="row no-gutters">
       <div class="col-md-12	featured-top">
         <div class="row no-gutters">
-          
+
+
+          <!-- <h1 class="ball text-white"></h1> -->
+
           <div class="col-md-12 d-flex align-items-center">
+            
+    
             <div class="services-wrap rounded-right w-100">
               <h3 class="heading-section mb-4">Better Way to Rent Your Perfect Cars</h3>
               <div class="row d-flex mb-4">
@@ -139,7 +177,9 @@ home
                 {% if car.fuel == 'Electric' and car.rentAmount < 5000 %}
                   <span>Exclusive</span>
                 {% elif car.rentAmount >= 5000 %}
-						      <span>Premium</span>
+						      <span class="premium">Premium</span>
+                {% elif car.carType == 'Classic' %}
+                  <span class="kar">Classic</span>
 						    {% else %}
 
                 {% endif %}
@@ -425,10 +465,12 @@ home
     <div class="row mb-5">
       <div class="col-md">
         <div class="ftco-footer-widget mb-4">
-          <h2 class="ftco-heading-2"><a href="#" class="logo">Rent <span>Kar o</span></a></h2>
+          <h2 class="ftco-heading-2"><a href="#" class="logo">Rent <span>Kar <span class="rotate">
+            <span class="car-tire">O</span></span></a></h2>
           <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
           <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
             <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+            
             <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
             <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
           </ul>
@@ -463,9 +505,29 @@ home
           <h2 class="ftco-heading-2">Have a Questions?</h2>
           <div class="block-23 mb-3">
             <ul>
-              <li><span class="icon icon-map-marker"></span><span class="text">Kinfra, Kakkanchery, Kozhikode, INDIA</span></li>
-              <li><a href="#"><span class="icon icon-phone"></span><span class="text">+91 999 866 855</span></a></li>
-              <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+              <li>
+                <lord-icon
+                    src="https://cdn.lordicon.com/cjhlqtae.json"
+                    trigger="hover"
+                    state="hover-jump-roll"
+                    style="width:40px;height:40px">
+                </lord-icon>
+                <span class="text">Kinfra, Kakkanchery, Kozhikode, INDIA</span></li><br>
+              <li><a href="#" ><lord-icon
+                src="https://cdn.lordicon.com/wzrwaorf.json"
+                trigger="hover"
+                style="width:40px;height:40px">
+            </lord-icon><span class="text">&nbsp +91 999 866 855</span></a></li>
+              <li><a href="#" >
+                <lord-icon
+                style="padding-right: 15px; margin-right:15px;"
+                    src="https://cdn.lordicon.com/ukwexxlc.json"
+                    trigger="hover"
+                    delay="1500"
+                    
+                    style="width:40px;height:40px">
+                </lord-icon>
+                <span class="text">info@yourdomain.com</span></a></li>
             </ul>
           </div>
         </div>

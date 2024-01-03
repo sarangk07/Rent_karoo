@@ -21,6 +21,7 @@ class Cars(models.Model):
         ("EV", "EV"),
         ("Sedan", "Sedan"),
         ("Hatchback", "Hatchback"),
+        ("Classic", "Classic"),
     ]
 
     make = models.CharField(max_length=50)
