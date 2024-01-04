@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from home.models import Cars, PickupData, Payment, Wishlist
 from users.models import Registerinfo, Profile
 from django.contrib.auth import authenticate, login, logout
-
+from django.db.models import Q
 from django.contrib.auth.decorators import user_passes_test
 from .form import CarUpdateForm
 from django.contrib.auth.hashers import check_password
@@ -209,6 +209,23 @@ def carDelete(request, id):
     car = Cars.objects.get(pk=id)
     car.delete()
     return redirect("admincars")
+
+def adsearch(request):
+    try:
+        if "keyword" in request.GET:
+            keyword = request.GET["keyword"]
+            if keyword:
+                car = Cars.objects.filter(is_available=True)
+                cars = car.order_by("added_date").filter(
+                    Q(model__icontains=keyword) | Q(make__icontains=keyword)
+                )  # Q using for OR operator
+            else:
+                return redirect("admincars")  
+        context = {"cars": cars}
+        return render(request, "admin/admincars.html", context)
+    except:
+        return redirect("admincars")
+
 
 
 @user_passes_test(super_admin )

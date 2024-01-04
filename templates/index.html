@@ -12,11 +12,12 @@ home
 {% block content %}
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
   <div class="container">
+    <!-- <img src="/media/logo.png" style="height: 100px; width: 100px;" alt=""> -->
     <a class="navbar-brand braaand" href="{% url 'home' %}">Rent <span class="kar">Kar  <span class="rotate">
       <span class="car-tire">O</span>
     </span>
     </span></span></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="oi oi-menu"></span> Menu
     </button>
 
@@ -76,7 +77,8 @@ home
                 src="https://cdn.lordicon.com/zorvjzqh.json"
                 trigger="hover"
                 style="width:40px;height:45px">
-            </lord-icon><p>Admin</p>
+            </lord-icon>
+            <!-- <p>Admin</p> -->
           </a>
             </li>
             {% endif %}
@@ -361,64 +363,6 @@ home
   </div>
 </section>
 
-<!-- <section class="ftco-section">
-  <div class="container">
-    <div class="row justify-content-center mb-5">
-      <div class="col-md-7 heading-section text-center ftco-animate">
-        <span class="subheading">Blog</span>
-        <h2>Recent Blog</h2>
-      </div>
-    </div>
-    <div class="row d-flex">
-      <div class="col-md-4 d-flex ftco-animate">
-        <div class="blog-entry justify-content-end">
-          <a href="blog-single.html" class="block-20 img1">
-          </a>
-          <div class="text pt-4">
-            <div class="meta mb-3">
-              <div><a href="#">Oct. 29, 2019</a></div>
-              <div><a href="#">Admin</a></div>
-              <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-            </div>
-            <h3 class="heading mt-2"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
-            <p><a href="#" class="btn btn-primary">Read more</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 d-flex ftco-animate">
-        <div class="blog-entry justify-content-end">
-          <a href="blog-single.html" class="block-20 img2">
-          </a>
-          <div class="text pt-4">
-            <div class="meta mb-3">
-              <div><a href="#">Oct. 29, 2019</a></div>
-              <div><a href="#">Admin</a></div>
-              <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-            </div>
-            <h3 class="heading mt-2"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
-            <p><a href="#" class="btn btn-primary">Read more</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 d-flex ftco-animate">
-        <div class="blog-entry">
-          <a href="blog-single.html" class="block-20 img3">
-          </a>
-          <div class="text pt-4">
-            <div class="meta mb-3">
-              <div><a href="#">Oct. 29, 2019</a></div>
-              <div><a href="#">Admin</a></div>
-              <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-            </div>
-            <h3 class="heading mt-2"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
-            <p><a href="#" class="btn btn-primary">Read more</a></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>	 -->
-
 <section class="ftco-counter ftco-section img bg-light" id="section-counter">
   <div class="overlay"></div>
   <div class="container">
@@ -508,26 +452,27 @@ home
               <li>
                 <lord-icon
                     src="https://cdn.lordicon.com/cjhlqtae.json"
-                    trigger="hover"
+                    trigger="loop"
                     state="hover-jump-roll"
                     style="width:40px;height:40px">
                 </lord-icon>
                 <span class="text">Kinfra, Kakkanchery, Kozhikode, INDIA</span></li><br>
-              <li><a href="#" ><lord-icon
+              <li><lord-icon
                 src="https://cdn.lordicon.com/wzrwaorf.json"
-                trigger="hover"
+                trigger="loop"
+                colors="primary:#9cf4df,secondary:#08a88a"
                 style="width:40px;height:40px">
-            </lord-icon><span class="text">&nbsp +91 999 866 855</span></a></li>
-              <li><a href="#" >
+            </lord-icon><span class="text">&nbsp +91 999 866 855</span></li>
+              <li>
                 <lord-icon
-                style="padding-right: 15px; margin-right:15px;"
+                  style="padding-right: 15px; margin-right:15px;"
                     src="https://cdn.lordicon.com/ukwexxlc.json"
-                    trigger="hover"
-                    delay="1500"
                     
+                    delay="1000"
+                    trigger="loop"
                     style="width:40px;height:40px">
                 </lord-icon>
-                <span class="text">info@yourdomain.com</span></a></li>
+                <span class="text">info@yourdomain.com</span></li>
             </ul>
           </div>
         </div>

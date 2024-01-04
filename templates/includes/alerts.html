@@ -1,18 +1,81 @@
-<!-- {% if messages %}
-<div id="messages" class="container">
-    {% for message in messages %}
-    <div>{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
-        {{ message }}
-    </div>
-</div>
-    {% endfor %}
 
-{% endif %} -->
 
 
 
 {% if messages %}
+  <style>
+    .custom-messages {
+      max-width: 300px; /* Set your desired maximum width */
+      margin: 10px auto; /* Adjust margin as needed */
+      
+    }
+    .alert{
+        color:rgb(12, 12, 12);
+        background-color: rgb(240, 245, 243);
+        border: none;
+    }
+
+    .custom-messages .alert {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px; /* Adjust padding as needed */
+      font-size: 14px; /* Adjust font size as needed */
+    }
+
+    .custom-messages .close {
+      margin-left: 10px; /* Adjust margin as needed */
+      cursor: pointer;
+    }
+    .close{
+        border-radius: 50px;
+        color:rgb(250, 62, 5);
+        border-color: rgb(15, 15, 15);
+    }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var alertMessages = document.querySelectorAll('.custom-messages .alert');
+      
+      alertMessages.forEach(function (alertMessage) {
+        setTimeout(function () {
+          alertMessage.style.display = 'none';
+        }, 3000); 
+      });
+    });
+  </script>
+
+  <div class="custom-messages">
+    {% for message in messages %}
+      <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+        <span>{{ message }}</span>
+        <button class="close" onclick="this.parentElement.style.display='none';" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- {% if messages %}
 
     {% for message in messages %}
     <div  style="color: red;" id="message" class="container">
@@ -24,4 +87,4 @@
 </div>
     {% endfor %}
 
-{% endif %} 
+{% endif %}  -->

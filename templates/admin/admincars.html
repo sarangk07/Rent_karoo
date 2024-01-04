@@ -85,7 +85,18 @@
                         <th class="text-center" scope="col">Added Date</th>
                         <th scope="col">Image</th>
                         <th scope="col">Car Details</th>
-                        <th scope="col"></th>
+                        <th scope="col">
+                          <form class="form-inline my-2 my-lg-0 ml-3" action="{% url 'adsearch' %}">
+                            <div class="input-group">
+                                <input class="form-control mr-sm-2 searchBar" type="search" placeholder="Search Model" aria-label="Search" name="keyword">
+                                <div class="input-group-append">
+                                    <button class="btn " style="width: 30px;" type="submit">
+                                        <lord-icon src="https://cdn.lordicon.com/unukghxb.json" trigger="hover" style="width: 20px; height: 20px;"></lord-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        </th>
                         <th class="text-center" scope="col">
                           <h3>
                             <a href="{% url 'caradd' %}" class="btn btn-primary"

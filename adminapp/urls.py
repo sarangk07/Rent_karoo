@@ -7,6 +7,7 @@ urlpatterns = [
     path("admindasbord/", views.admindasbord, name="admindasbord"),
     path("userviewEdit/<str:id>/", views.userviewEdit, name="userviewEdit"),
     path("adminuser/", views.adminuser, name="adminuser"),
+    path("adsearch/", views.adsearch, name="adsearch"),
     path("adminprofile/", views.adminprofile, name="adminprofile"),
     path("adminblock/<str:id>/", views.adminblock, name="adminblock"),
     path("adminActive/<str:id>/", views.adminActive, name="adminActive"),

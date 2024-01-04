@@ -131,6 +131,13 @@ def editProfile(request):
             print("Enter Valid Input")
             print(user_form.errors)
             print(profile_form.errors)
+            for field, errors in user_form.errors.items():
+                messages.error(request, f"User form error for {field}: {', '.join(errors)}")
+            
+            for field, errors in profile_form.errors.items():
+                messages.error(request, f"Profile form error for {field}: {', '.join(errors)}")
+            
+            return redirect('editProfile')
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileUpdate(instance=user_profile)
@@ -144,10 +151,11 @@ def editProfile(request):
     return render(request, "user_temp/editProfile.html", context)
 
 
+
 # user login
 @logout_required
 def user_login(request):
-    
+    count = 0
     if request.method == "POST":
         try:
             print("---------------------User-^-login----------------------------")
@@ -169,8 +177,21 @@ def user_login(request):
                 login(request, user)
                 return redirect("home")
             
+            
             elif not users.check_password(password):
                 messages.warning(request, "Wrong password!")
+                # count += 1
+                
+                # if not users.is_superadmin:
+                    
+                #     print("()()()()()()()()counts",count)
+                # if count>5:
+                #     users.is_block = True
+                #     users.save()
+                    
+                #     messages.warning(request, "Youer Account has been blocked due to secuerity issue! plz contact the admin..")
+                #     return redirect("login")
+                
                 return redirect("login")
             elif not users.is_active:
                 messages.warning(request, "Your account not activated!, please activate your account")
