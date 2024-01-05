@@ -9,7 +9,6 @@ from .form import CarUpdateForm
 from django.contrib.auth.hashers import check_password
 
 
-
 # Create your views here.
 def super_admin(user):
     return user.is_authenticated and user.is_superadmin or user.is_staff
@@ -54,7 +53,6 @@ def adminlogout(request):
 @user_passes_test(super_admin)
 def adminprofile(request):
     user = request.user
-    
 
     admin = request.user
     users = get_object_or_404(Registerinfo, email=admin)
@@ -69,18 +67,18 @@ def adminprofile(request):
 @user_passes_test(super_admin)
 def adminblock(request, id):
     user = Registerinfo.objects.get(email=id)
-   
 
     user.is_block = not user.is_block
-    
+
     user.save()
     print("user found/n", user)
     return redirect("adminuser")
 
+
 @user_passes_test(super_admin)
 def adminActive(request, id):
     user = Registerinfo.objects.get(email=id)
-    
+
     user.is_active = not user.is_active
     user.save()
     print("user found/n", user)
@@ -88,7 +86,7 @@ def adminActive(request, id):
 
 
 @user_passes_test(super_admin)
-def adminStaff(request,id):
+def adminStaff(request, id):
     user = Registerinfo.objects.get(email=id)
     user.is_staff = not user.is_staff
     user.save()
@@ -111,9 +109,7 @@ def admindasbord(request):
     total_users = Registerinfo.objects.count()
     total_bookings = PickupData.objects.count()
     caron_go = Cars.objects.filter(in_garage=False)
-    
-    
-    
+
     context = {
         "users": users,
         "payments": payments,
@@ -126,7 +122,7 @@ def admindasbord(request):
         "total_cars": total_cars,
         "total_users": total_users,
         "total_bookings": total_bookings,
-        "caron_go":caron_go
+        "caron_go": caron_go,
     }
     return render(request, "admin/adminDashbord.html", context)
 
@@ -151,15 +147,14 @@ def userviewEdit(request, id):
 
         return render(request, "admin/userEdit.html", context)
     else:
-        return redirect('admindasbord')
-        
+        return redirect("admindasbord")
 
 
 @user_passes_test(super_admin)
 def adminuser(request):
     userss = request.user
     user = Registerinfo.objects.all()
-    context = {"users": user,'userss':userss}
+    context = {"users": user, "userss": userss}
     return render(request, "admin/adminusers.html", context)
 
 
@@ -171,7 +166,7 @@ def admincars(request):
     return render(request, "admin/admincars.html", context)
 
 
-@user_passes_test(super_admin )
+@user_passes_test(super_admin)
 def carAdd(request):
     if request.method == "POST":
         form = CarUpdateForm(request.POST, request.FILES)
@@ -180,7 +175,7 @@ def carAdd(request):
             return redirect("admincars")
     else:
         form = CarUpdateForm()
-        
+
     context = {
         "form": form,
     }
@@ -210,6 +205,7 @@ def carDelete(request, id):
     car.delete()
     return redirect("admincars")
 
+
 def adsearch(request):
     try:
         if "keyword" in request.GET:
@@ -220,15 +216,14 @@ def adsearch(request):
                     Q(model__icontains=keyword) | Q(make__icontains=keyword)
                 )  # Q using for OR operator
             else:
-                return redirect("admincars")  
+                return redirect("admincars")
         context = {"cars": cars}
         return render(request, "admin/admincars.html", context)
     except:
         return redirect("admincars")
 
 
-
-@user_passes_test(super_admin )
+@user_passes_test(super_admin)
 def adminbooking(request):
     bookings = PickupData.objects.all().order_by("-bookedDate")
     payments = Payment.objects.all().order_by("-created_at")
@@ -239,10 +234,8 @@ def adminbooking(request):
 
 def adminbook(request, id):
     payments = Payment.objects.filter(booking=id)
-    print( payments)
-    context = {
-        'payments': payments
-    }
+    print(payments)
+    context = {"payments": payments}
     return render(request, "admin/userEdit.html", context)
 
 
@@ -251,7 +244,7 @@ def paymentDetails(request):
     user = request.user
     payments = Payment.objects.all().order_by("-created_at")
 
-    context = {"payments": payments,'user':user}
+    context = {"payments": payments, "user": user}
     return render(request, "admin/paymentView.html", context)
 
 

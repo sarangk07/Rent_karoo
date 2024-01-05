@@ -50,7 +50,6 @@ class Registerinfo(AbstractBaseUser):
     username = models.CharField(max_length=30, unique=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=20)
-    
 
     # requre fileds
     date_joined = models.DateTimeField(auto_now_add=True)
@@ -59,9 +58,8 @@ class Registerinfo(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
     is_superadmin = models.BooleanField(default=False)
-    
+
     is_block = models.BooleanField(default=False)
-    
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = [
@@ -114,8 +112,6 @@ class Profile(models.Model):
     state = models.CharField(max_length=30, null=True)
     city = models.CharField(max_length=40, null=True)
     profilePic = models.ImageField(upload_to="media/userimages", null=True, blank=True)
-    
-    
 
     class Meta:
         verbose_name = "Profile"

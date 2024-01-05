@@ -112,7 +112,6 @@ def activate(request, uidb64, token):
         return redirect("register")
 
 
-
 @login_required(login_url="login")
 @csrf_exempt
 def editProfile(request):
@@ -136,12 +135,16 @@ def editProfile(request):
             print(user_form.errors)
             print(profile_form.errors)
             for field, errors in user_form.errors.items():
-                messages.error(request, f"User form error for {field}: {', '.join(errors)}")
-            
+                messages.error(
+                    request, f"User form error for {field}: {', '.join(errors)}"
+                )
+
             for field, errors in profile_form.errors.items():
-                messages.error(request, f"Profile form error for {field}: {', '.join(errors)}")
-            
-            return redirect('editProfile')
+                messages.error(
+                    request, f"Profile form error for {field}: {', '.join(errors)}"
+                )
+
+            return redirect("editProfile")
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileUpdate(instance=user_profile)
@@ -153,7 +156,6 @@ def editProfile(request):
     }
 
     return render(request, "user_temp/editProfile.html", context)
-
 
 
 # user login
@@ -172,35 +174,37 @@ def user_login(request):
             user = authenticate(request, email=email, password=password)
 
             print("-----------------------------^------------------------------")
-            
 
             if user is not None:
                 if users.is_block:
-                    messages.warning(request, "Your account is blocked!, please contact with us")
+                    messages.warning(
+                        request, "Your account is blocked!, please contact with us"
+                    )
                     return redirect("login")
                 login(request, user)
                 return redirect("home")
-            
-            
+
             elif not users.check_password(password):
                 messages.warning(request, "Wrong password!")
                 # count += 1
-                
+
                 # if not users.is_superadmin:
-                    
+
                 #     print("()()()()()()()()counts",count)
                 # if count>5:
                 #     users.is_block = True
                 #     users.save()
-                    
+
                 #     messages.warning(request, "Youer Account has been blocked due to secuerity issue! plz contact the admin..")
                 #     return redirect("login")
-                
+
                 return redirect("login")
             elif not users.is_active:
-                messages.warning(request, "Your account not activated!, please activate your account")
+                messages.warning(
+                    request, "Your account not activated!, please activate your account"
+                )
                 return redirect("login")
-            
+
             else:
                 messages.warning(request, "somthing went wrong!")
                 return redirect("login")
@@ -225,16 +229,18 @@ def user_logout(request):
 @login_required(login_url="login")
 def dashbord(request):
     user = Registerinfo.objects.filter(email=request.user.email)
-    pickupDetails = PickupData.objects.filter(user=request.user).order_by('-bookedDate') 
+    pickupDetails = PickupData.objects.filter(user=request.user).order_by("-bookedDate")
     pay = Payment.objects.filter(user=request.user)
 
-    
     paginator = Paginator(pickupDetails, 2)
     page = request.GET.get("page")
 
     try:
         pickupDetails = paginator.page(page)
-        print("pppppppppppppppppppaaaaaaaaaaaaaaaaaaaaaaaaaaaaagggggggggggggggggggggggggeeeeeeeeeeeeeeeeeeeeee",paginator)
+        print(
+            "pppppppppppppppppppaaaaaaaaaaaaaaaaaaaaaaaaaaaaagggggggggggggggggggggggggeeeeeeeeeeeeeeeeeeeeee",
+            paginator,
+        )
     except PageNotAnInteger:
         pickupDetails = paginator.page(1)
     except EmptyPage:
@@ -274,7 +280,6 @@ def dashbord(request):
     return render(request, "user_temp/dashbord.html", context)
 
 
-
 # user forgotpassword
 def forgotpassword(request):
     if request.method == "POST":
@@ -311,9 +316,6 @@ def forgotpassword(request):
             messages.error(request, "Somthing went wrong!, plz check your internet")
             return redirect("forgotpassword")
     return render(request, "user_temp/forgotpassword.html")
-    
-
-
 
 
 # user resetPassword validation
@@ -330,8 +332,6 @@ def resetpassword_validate(request, uidb64, token):
     else:
         messages.error(request, "The link has been expired")
         return redirect("login")
-
-
 
 
 # user resetpassword
@@ -393,7 +393,6 @@ def changePassword(request):
         confirm_password = request.POST["password2"]
         password_regex = r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
 
-
         if oldPassword and password and confirm_password:
             if password == confirm_password:
                 user = request.user
@@ -429,8 +428,3 @@ def changePassword(request):
     else:
         print("DATA NOT FOUND")
         return render(request, "user_temp/changePassword.html")
-
-
-
-
-

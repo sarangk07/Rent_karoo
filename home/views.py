@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from home.models import Cars, PickupData, Payment, Wishlist
-from users.models import Registerinfo,Profile
+from users.models import Registerinfo, Profile
 
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
@@ -36,8 +36,7 @@ from django.core.paginator import Paginator
 # home page
 def home(request):
     cars = Cars.objects.filter(is_available=True)
-    
-    
+
     if request.user.is_authenticated:
         try:
             profuser = get_object_or_404(Profile, user=request.user)
@@ -45,7 +44,7 @@ def home(request):
         except:
             context = {"cars": cars}
             return render(request, "index.html", context)
-    else:    
+    else:
         print(cars)
         context = {"cars": cars}
     return render(request, "index.html", context)
@@ -241,6 +240,7 @@ def termsandConditions(request):
 
 # payment
 
+
 @login_required(login_url="login")
 def payment(request, id):
     try:
@@ -276,7 +276,7 @@ def payment(request, id):
             if not all([pickup, dropoff, pickuptime, email, mobile, licence]):
                 messages.error(request, "fill all the fields")
                 return redirect("pickupDetails", id=id)
-            
+
             elif len(mobile) != 10:
                 messages.error(request, "mobile number need 10 digits!")
                 return redirect("pickupDetails", id=id)
@@ -332,8 +332,6 @@ def payment(request, id):
             gst = int(planTotal * 5 / 100)
             gTotal = int(planTotal + gst)
 
-            
-
             if not re.match(r"^(\+\d{1,3}[- ]?)?\d{10}$", mobile):
                 messages.error(request, "This is not a valid mobile number!")
                 return redirect("pickupDetails", id=id)
@@ -345,7 +343,7 @@ def payment(request, id):
             if not re.match(r"^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$", email):
                 messages.error(request, "This is not a valid email!")
                 return redirect("pickupDetails", id=id)
-            
+
             # Dropoff date not be lower that pickup date!
             if pickup_datetime > dropoff_datetime:
                 messages.error(request, "Dropoff date not be lower that pickup date!")

@@ -76,8 +76,7 @@ class PickupData(models.Model):
     licence_ID = models.CharField(max_length=50)
     car = models.ForeignKey(Cars, on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(Registerinfo, on_delete=models.CASCADE, null=True)
-    
-   
+
     pay = models.BooleanField(default=False)
     bookedDate = models.DateTimeField(auto_now_add=True, null=True)
     plan = models.CharField(max_length=20, choices=Plans, default="")
