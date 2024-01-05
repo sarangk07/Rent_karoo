@@ -37,51 +37,55 @@ def logout_required(view_func):
 @logout_required
 def register(request):
     if request.method == "POST":
-        form = RegisterForm(
-            request.POST
-        )  # request.POST-- it contains all the field values
-        print(request.POST)
-        print("-------------------------register--------------------------")
+        try:
+            form = RegisterForm(
+                request.POST
+            )  # request.POST-- it contains all the field values
+            print(request.POST)
+            print("-------------------------register--------------------------")
 
-        if form.is_valid():
-            first_name = form.cleaned_data["first_name"]
-            last_name = form.cleaned_data["last_name"]
-            username = form.cleaned_data["username"]
-            email = form.cleaned_data["email"]
-            password = form.cleaned_data["password"]
+            if form.is_valid():
+                first_name = form.cleaned_data["first_name"]
+                last_name = form.cleaned_data["last_name"]
+                username = form.cleaned_data["username"]
+                email = form.cleaned_data["email"]
+                password = form.cleaned_data["password"]
 
-            users = Registerinfo.objects.create_user(
-                first_name=first_name,
-                last_name=last_name,
-                username=username,
-                email=email,
-                password=password,
-            )
-            # users.save()
-            Wishlist.objects.create(wish_user=users)
-            # user Email activation
-            current_site = get_current_site(request)
-            mail_subject = "please activate your account"
-            message = render_to_string(
-                "user_temp/account_verification_email.html",
-                {
-                    "user": users,
-                    "domain": current_site,
-                    "uid": urlsafe_base64_encode(force_bytes(users.pk)),  # user id
-                    "token": default_token_generator.make_token(users),
-                },
-            )
-            to_email = email
-            sent_email = EmailMessage(mail_subject, message, to=[to_email])
-            sent_email.send()
+                users = Registerinfo.objects.create_user(
+                    first_name=first_name,
+                    last_name=last_name,
+                    username=username,
+                    email=email,
+                    password=password,
+                )
+                # users.save()
+                Wishlist.objects.create(wish_user=users)
+                # user Email activation
+                current_site = get_current_site(request)
+                mail_subject = "please activate your account"
+                message = render_to_string(
+                    "user_temp/account_verification_email.html",
+                    {
+                        "user": users,
+                        "domain": current_site,
+                        "uid": urlsafe_base64_encode(force_bytes(users.pk)),  # user id
+                        "token": default_token_generator.make_token(users),
+                    },
+                )
+                to_email = email
+                sent_email = EmailMessage(mail_subject, message, to=[to_email])
+                sent_email.send()
 
-            messages.success(
-                request,
-                "Registration success. please activate your account .check your mail",
-            )
+                messages.success(
+                    request,
+                    "Registration success. please activate your account .check your mail",
+                )
+                return redirect("register")
+            print(form.errors)
+            messages.error(request, form.errors)
+        except:
+            messages.error(request, "Somthing went wrong!, plz check your internet")
             return redirect("register")
-        print(form.errors)
-        messages.error(request, form.errors)
     else:
         form = RegisterForm()
 
@@ -274,35 +278,40 @@ def dashbord(request):
 # user forgotpassword
 def forgotpassword(request):
     if request.method == "POST":
-        email = request.POST["email"]
-        if Registerinfo.objects.filter(
-            email=email
-        ).exists():  # .exists() --check the email in the Acccounts
-            user = Registerinfo.objects.get(email=email)
+        try:
+            email = request.POST["email"]
+            if Registerinfo.objects.filter(
+                email=email
+            ).exists():  # .exists() --check the email in the Acccounts
+                user = Registerinfo.objects.get(email=email)
 
-            current_site = get_current_site(request)
-            mail_subject = "reset password"
-            message = render_to_string(
-                "user_temp/reset_password_email.html",
-                {
-                    "user": user,
-                    "domain": current_site,
-                    "uid": urlsafe_base64_encode(force_bytes(user.pk)),
-                    "token": default_token_generator.make_token(user),
-                },
-            )
-            to_email = email
-            sent_email = EmailMessage(mail_subject, message, to=[to_email])
-            sent_email.send()
+                current_site = get_current_site(request)
+                mail_subject = "reset password"
+                message = render_to_string(
+                    "user_temp/reset_password_email.html",
+                    {
+                        "user": user,
+                        "domain": current_site,
+                        "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                        "token": default_token_generator.make_token(user),
+                    },
+                )
+                to_email = email
+                sent_email = EmailMessage(mail_subject, message, to=[to_email])
+                sent_email.send()
 
-            messages.success(
-                request, "reset password email send success! check your mail"
-            )
-            return redirect("login")
-        else:
-            messages.error(request, "Account with this email not found!")
+                messages.success(
+                    request, "reset password email send success! check your mail"
+                )
+                return redirect("login")
+            else:
+                messages.error(request, "Account with this email not found!")
+                return redirect("forgotpassword")
+        except:
+            messages.error(request, "Somthing went wrong!, plz check your internet")
             return redirect("forgotpassword")
     return render(request, "user_temp/forgotpassword.html")
+    
 
 
 
