@@ -87,14 +87,26 @@ AUTH_USER_MODEL = "users.Registerinfo"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "RentCar",
+#         "USER": "postgres",
+#         "PASSWORD": "8547534169",
+#         "HOST": "localhost",  # Set to the address of your PostgreSQL server
+#         "PORT": "5432",  # Set to the port of your PostgreSQL server
+#     }
+# }
+
+# Replace name, Password, Host with your RDS Database name, user, password, host.
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "RentCar",
-        "USER": "postgres",
-        "PASSWORD": "8547534169",
-        "HOST": "localhost",  # Set to the address of your PostgreSQL server
-        "PORT": "5432",  # Set to the port of your PostgreSQL server
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'rentkaroDB',
+        'USER': 'mysuperuser',
+        'PASSWORD': 'mysuperuser',
+        'HOST': 'rentkaro.cpaw0aow0cjk.eu-north-1.rds.amazonaws.com',
+        'PORT': '5432'
     }
 }
 
