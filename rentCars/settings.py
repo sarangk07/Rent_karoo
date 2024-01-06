@@ -102,9 +102,9 @@ AUTH_USER_MODEL = "users.Registerinfo"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'rentkaroDB',
-        'USER': 'mysuperuser',
-        'PASSWORD': 'mysuperuser',
+        'NAME': 'DATABASE_NAME',
+        'USER': 'DATABASE_USER',
+        'PASSWORD': 'DATABASE_PASSWORD',
         'HOST': 'rentkaro.cpaw0aow0cjk.eu-north-1.rds.amazonaws.com',
         'PORT': '5432'
     }
@@ -145,12 +145,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "templates/static/"
+STATIC_URL = "/static/"
 
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, 'templates\static'),
 # ]
-STACTIC_ROOT = "templates/static/"
+STATIC_ROOT = "static/"
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "templates/static")]
 MEDIA_URL = "media/"
@@ -186,12 +186,12 @@ EMAIL_USE_TLS = True
 
 # Razorpay
 
-KEYID = "rzp_test_icqwFX4tKVuQcU"
-KEY = "4vf93HteZ7KPZLBj8hOXIRYQ"
+KEYID = "RAZORPAY_KEY_ID"
+KEY = "RAZORPAY_KEY"
 
 
-AWS_ACCESS_KEY_ID = "AKIAW3MEEDXLHBTLOQNV"
-AWS_SECRET_ACCESS_KEY = "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"
+AWS_ACCESS_KEY_ID = 'AWS_ACCESS_KEY'
+AWS_SECRET_ACCESS_KEY = "AWS_SECRET_KEY"
 
 AWS_STORAGE_BUCKET_NAME = "rentkaro"
 AWS_S3_SIGNATURE_NAME = ("s3v4",)
