@@ -18,6 +18,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 from dotenv import load_dotenv
+
+
 import os
 
 
@@ -102,9 +104,9 @@ AUTH_USER_MODEL = "users.Registerinfo"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'DATABASE_NAME',
-        'USER': 'DATABASE_USER',
-        'PASSWORD': 'DATABASE_PASSWORD',
+        'NAME': 'rentkaroDB',
+        'USER': 'mysuperuser',
+        'PASSWORD': 'mysuperuser',
         'HOST': 'rentkaro.cpaw0aow0cjk.eu-north-1.rds.amazonaws.com',
         'PORT': '5432'
     }
@@ -186,12 +188,12 @@ EMAIL_USE_TLS = True
 
 # Razorpay
 
-KEYID = "RAZORPAY_KEY_ID"
-KEY = "RAZORPAY_KEY"
+KEYID = "rzp_test_icqwFX4tKVuQcU"
+KEY = "4vf93HteZ7KPZLBj8hOXIRYQ"
 
 
-AWS_ACCESS_KEY_ID = 'AWS_ACCESS_KEY'
-AWS_SECRET_ACCESS_KEY = "AWS_SECRET_KEY"
+AWS_ACCESS_KEY_ID = 'AKIAW3MEEDXLHBTLOQNV'
+AWS_SECRET_ACCESS_KEY = "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"
 
 AWS_STORAGE_BUCKET_NAME = "rentkaro"
 AWS_S3_SIGNATURE_NAME = ("s3v4",)
