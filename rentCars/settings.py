@@ -105,11 +105,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'rentkaroDB',
-        'USER': 'mysuperuser',
-        'PASSWORD': 'mysuperuser',
-        'HOST': 'rentkaro.cpaw0aow0cjk.eu-north-1.rds.amazonaws.com',
+        'USER': os.environ.get("DATABASE_USER"),
+        'PASSWORD': os.environ.get("DATABASE_PASSWORD"),
+        'HOST': os.environ.get("DATABASE_HOST"),
         'PORT': '5432'
     }
+    
 }
 
 
@@ -188,12 +189,13 @@ EMAIL_USE_TLS = True
 
 # Razorpay
 
-KEYID = "rzp_test_icqwFX4tKVuQcU"
-KEY = "4vf93HteZ7KPZLBj8hOXIRYQ"
+KEYID = os.environ.get("RAZORPAY_KEY_ID")
+KEY = os.environ.get("RAZORPAY_KEY")
 
 
-AWS_ACCESS_KEY_ID = 'AKIAW3MEEDXLHBTLOQNV'
-AWS_SECRET_ACCESS_KEY = "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"
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_KEY")
+
 
 AWS_STORAGE_BUCKET_NAME = "rentkaro"
 AWS_S3_SIGNATURE_NAME = ("s3v4",)
