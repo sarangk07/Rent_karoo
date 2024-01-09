@@ -105,8 +105,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'rentkaroDB',
-        'USER': os.environ.get('DATABASE_USER'),
-        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+        'USER': 'mysuperuser',
+        'PASSWORD': 'masteruser',
         'HOST': 'rentkaro.cpaw0aow0cjk.eu-north-1.rds.amazonaws.com',
         'PORT': '5432'
     }
