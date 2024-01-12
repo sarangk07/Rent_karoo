@@ -549,4 +549,4 @@ def success(request):
         print("error", e)
 
     # client = razorpay.Client(auth=(settings.KEYID, settings.KEY))
-    return HttpResponse("An Error Occurred!")
+    return HttpResponse("An Error Occurred!",e)

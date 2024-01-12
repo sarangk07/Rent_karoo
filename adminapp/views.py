@@ -107,7 +107,7 @@ def admindasbord(request):
     latest_cars = Cars.objects.all().order_by("-added_date")[:3]
     total_cars = Cars.objects.count()
     total_users = Registerinfo.objects.count()
-    total_bookings = PickupData.objects.count()
+    total_bookings = latest_bookings.count()
     caron_go = Cars.objects.filter(in_garage=False)
 
     context = {
@@ -179,7 +179,7 @@ def carAdd(request):
     context = {
         "form": form,
     }
-    return render(request, "admin/carupdate.html", context)
+    return render(request, "admin/carUpdate.html", context)
 
 
 @user_passes_test(super_admin)
@@ -196,7 +196,7 @@ def carUpdate(request, id):
     context = {
         "form": form,
     }
-    return render(request, "admin/carupdate.html", context)
+    return render(request, "admin/carUpdate.html", context)
 
 
 @user_passes_test(super_admin)

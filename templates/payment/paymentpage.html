@@ -347,12 +347,12 @@ h5,
             "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
             "handler": function (response){
                 console.log('success!')
-                alert("Payment Details was sended to your mail! {{pickup_data.user.email}}");
+                
                 var razorpay_payment_id = response.razorpay_payment_id;
                 var razorpay_signature = response.razorpay_signature;
+                alert("Payment Details was sended to your mail! {{pickup_data.user.email}}");
 
-
-                window.location.href = `http://127.0.0.1:8000/success/?orderid={{payment.id}}&razorpay_payment_id=${razorpay_payment_id}&razorpay_signature=${razorpay_signature}`
+                window.location.href = `http://16.171.1.65/success/?orderid={{payment.id}}&razorpay_payment_id=${razorpay_payment_id}&razorpay_signature=${razorpay_signature}`
                 // window.location.href = `http://127.0.0.1:8000/success/?orderid={{payment.id}}&razorpay_payment_id=${razorpay_payment_id}&razorpay_signature=${razorpay_signature}`
 
                 

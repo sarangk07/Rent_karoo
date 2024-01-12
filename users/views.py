@@ -230,27 +230,29 @@ def user_logout(request):
 def dashbord(request):
     user = Registerinfo.objects.filter(email=request.user.email)
     pickupDetails = PickupData.objects.filter(user=request.user).order_by("-bookedDate")
+    successpayments = pickupDetails.filter(pay=True)
+
     pay = Payment.objects.filter(user=request.user)
 
-    paginator = Paginator(pickupDetails, 2)
+    paginator = Paginator(successpayments, 2)
     page = request.GET.get("page")
 
     try:
-        pickupDetails = paginator.page(page)
+        successpayments = paginator.page(page)
         print(
             "pppppppppppppppppppaaaaaaaaaaaaaaaaaaaaaaaaaaaaagggggggggggggggggggggggggeeeeeeeeeeeeeeeeeeeeee",
             paginator,
         )
     except PageNotAnInteger:
-        pickupDetails = paginator.page(1)
+        successpayments = paginator.page(1)
     except EmptyPage:
-        pickupDetails = paginator.page(paginator.num_pages)
+        successpayments = paginator.page(paginator.num_pages)
 
     current_date = datetime.now()
     formatted_date = current_date.strftime("%m-%d-%Y")
     formatted_date_obj = datetime.strptime(formatted_date, "%m-%d-%Y").date()
 
-    dropoff_dates = [pickup.dropoff_date for pickup in pickupDetails]
+    dropoff_dates = [pickup.dropoff_date for pickup in successpayments]
 
     for dropoff_date in dropoff_dates:
         if dropoff_date == formatted_date_obj:
@@ -272,7 +274,7 @@ def dashbord(request):
     )
 
     context = {
-        "pickupDetails": pickupDetails,
+        "pickupDetails": successpayments,
         "pay": pay,
         "currentDate": formatted_date_obj,
         "wishlist_items": wishlist_items.wish_car.all() if wishlist_items else None,
