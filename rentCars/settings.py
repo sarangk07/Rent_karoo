@@ -39,8 +39,9 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['rentkaro.shop','16.171.1.65']
 
+CSRF_TRUSTED_ORIGINS = ['https://rentkaro.shop']
 
 # Application definition
 

@@ -23,17 +23,7 @@ home
 
     <div class="collapse navbar-collapse" id="ftco-nav">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active" ><a href="{% url 'home' %}" class="nav-link" style="margin: 0px; padding: 0px;"><lord-icon
-          src="https://cdn.lordicon.com/laqlvddb.json"
-          trigger="hover"
-          style="width:40px;height:45px">
-      </lord-icon></a></li>
-        <!-- <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-        <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-        <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li> -->
-        
-        <!-- <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li> -->
+        <li class="nav-item " ><a href="{% url 'home' %}" class="nav-link">Home</a></li>
         {% if user.id is none %}
             &nbsp;&nbsp;&nbsp;<li class="nav-item"><a href="{% url 'cars' %}" class="nav-link">Cars</a></li>
             <li class="nav-item">
@@ -224,7 +214,7 @@ home
 
           <p>"Rent Karo" is a premier car rental platform designed to provide a seamless and convenient vehicle rental experience. With an extensive fleet of well-maintained vehicles, ranging from compact cars to spacious SUVs, customers can easily find the perfect ride for any occasion. The user-friendly website offers a straightforward booking process, allowing users to specify rental dates, vehicle preferences, and additional services.</p>
           <p>"Rent Karo" prioritizes customer satisfaction by ensuring transparent pricing, flexible rental durations, and efficient customer support. The platform incorporates advanced search and filtering options, making it effortless for users to locate the ideal vehicle that suits their needs and budget. Whether for a weekend getaway, business trip, or special event, "Rent Karo" aims to be the go-to choice for reliable and affordable car rentals.</p>
-          <p><a href="#" class="btn btn-primary py-3 px-4">Search Vehicle</a></p>
+         
         </div>
       </div>
     </div>

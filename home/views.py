@@ -186,10 +186,8 @@ def priceSorting(request, sort_type=None):
 def add_to_wishlist(request, car_id):
     if request.user.is_authenticated:
         if request.method == "POST":
-            car = Cars.objects.get(pk=car_id)  # car id
-            user = request.user  # user email
-
-            print("------request.user----------*******CAR**", car.id, user)
+            car = Cars.objects.get(pk=car_id)
+            user = request.user
 
             wishitem, created = Wishlist.objects.get_or_create(wish_user=user)
 
@@ -204,33 +202,76 @@ def add_to_wishlist(request, car_id):
                     "message": "Wishlist already exists",
                 }
 
+                # Get the referring URL
                 referer = request.META.get("HTTP_REFERER", None)
-                if referer and referer.startswith(request.build_absolute_uri("/")):
-                    return HttpResponseRedirect(referer)
-            # return redirect('cars')
+
+                # If the referring URL exists and matches the allowed hosts, redirect back to it.
+                if referer:
+                    allowed_hosts = ['rentkaro.shop', '16.171.1.65']
+                    for host in allowed_hosts:
+                        if referer.startswith(f'https://{host}') or referer.startswith(f'http://{host}'):
+                            return HttpResponseRedirect(referer)
+
+            return redirect("cars")  # Adjust the redirect URL if needed
         else:
             return redirect("home")
+
+
+
+# def add_to_wishlist(request, car_id):
+#     if request.user.is_authenticated:
+#         if request.method == "POST":
+#             car = Cars.objects.get(pk=car_id)  # car id
+#             user = request.user  # user email
+
+#             print("------request.user----------*******CAR**", car.id, user)
+
+#             wishitem, created = Wishlist.objects.get_or_create(wish_user=user)
+
+#             if created:
+#                 wishitem.wish_car.add(car)
+#                 data = {
+#                     "message": "Wishlist added successfully",
+#                 }
+#             else:
+#                 wishitem.wish_car.add(car)
+#                 data = {
+#                     "message": "Wishlist already exists",
+#                 }
+
+#                 referer = request.META.get("HTTP_REFERER", None)
+
+#                 if referer and referer.startswith(request.build_absolute_uri("/")):
+#                     return HttpResponseRedirect(referer)
+#         else:
+#             return redirect("home")
+
+
+
+
 
 
 # remove wishlist
 def remove_from_wishlist(request, car_id):
     if request.user.is_authenticated:
         car = Cars.objects.get(pk=car_id)
-        print("----car-----", car, "----carid------", car_id)
         wishlist = Wishlist.objects.get(wish_user=request.user)
-        print("----wishlist-----", wishlist)
         wishlist.wish_car.remove(car)
         wishlist.save()
 
         # Get the referring URL
         referer = request.META.get("HTTP_REFERER", None)
-        print("------------------wishlist-----------------------", referer)
-        # If the referring URL exists , redirect back to it.
-        if referer and referer.startswith(request.build_absolute_uri("/")):
-            # print(request.build_absolute_uri('/'))
-            return HttpResponseRedirect(referer)
 
+        # If the referring URL exists and matches the allowed hosts, redirect back to it.
+        if referer:
+            allowed_hosts = ['rentkaro.shop', '16.171.1.65']
+            for host in allowed_hosts:
+                if referer.startswith(f'https://{host}') or referer.startswith(f'http://{host}'):
+                    return HttpResponseRedirect(referer)
+
+    # If no referring URL or it doesn't match, redirect to "dashbord".
     return redirect("dashbord")
+
 
 
 # terms and conditions
