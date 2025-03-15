@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 import os
 
-
+print(os.environ.get("DATABASE_USER"))  # Should print the value
 
 
 
@@ -39,7 +39,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['rentkaro.shop','16.171.1.65']
+ALLOWED_HOSTS = ['rentkaro.shop','16.171.1.65','127.0.0.1']
 
 CSRF_TRUSTED_ORIGINS = ['https://rentkaro.shop']
 
@@ -111,19 +111,31 @@ AUTH_USER_MODEL = "users.Registerinfo"
 #         "PORT": "5432",  # Set to the port of your PostgreSQL server
 #     }
 # }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "RentCar",
+        "USER": "postgres",  # Hardcoded user
+        "PASSWORD": "8547534169",
+        "HOST": "localhost",
+        "PORT": "5432",
+    }
+}
+
+
 
 # Replace name, Password, Host with your RDS Database name, user, password, host.
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'rentkaroDB',
-        'USER': config("DATABASE_USER"),
-        'PASSWORD': config("DATABASE_PASSWORD"),
-        'HOST': config("DATABASE_HOST"),
-        'PORT': '5432'
-    }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'rentkaroDB',
+#         'USER': config("DATABASE_USER"),
+#         'PASSWORD': config("DATABASE_PASSWORD"),
+#         'HOST': config("DATABASE_HOST"),
+#         'PORT': '5432'
+#     }
     
-}
+# }
 
 
 # Password validation
@@ -201,12 +213,19 @@ EMAIL_USE_TLS = True
 
 # Razorpay
 
-KEYID = config("RAZORPAY_KEY_ID")
-KEY = config("RAZORPAY_KEY")
 
+KEYID = config("RAZORPAY_KEY_ID", default="dummy_key")
+KEY = config("RAZORPAY_KEY", default="dummy_secret")
 
-AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY")
-AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_KEY")
+# KEYID = config("RAZORPAY_KEY_ID")
+# KEY = config("RAZORPAY_KEY")
+
+AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY", default="dummy_aws_key")
+RAZORPAY_KEY_ID = config("RAZORPAY_KEY_ID", default="dummy_razorpay_key")
+AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_KEY" , default="dummy_asw_key")
+
+# AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY")
+# AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_KEY")
 
 
 AWS_STORAGE_BUCKET_NAME = "rentkaro"
